@@ -3,6 +3,10 @@
 # C extensions
 *.so
 
+#añadidas al proyecto
+*.db
+*.py~
+
 # Packages
 *.egg
 *.egg-info
