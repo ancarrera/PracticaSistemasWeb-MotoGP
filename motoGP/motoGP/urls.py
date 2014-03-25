@@ -16,11 +16,13 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
     url(r'^pilot/$', pilotpage),
-    url(r'^manofacturer/$',manofacturerpage ),
+    #url(r'^manufacturer/$',manufacturerpage ),
     url(r'^country/$',countrypage ),
     url(r'^category/$',categorypage ),
-    url(r'^pilot/(\w+)', pilotinfo),
-    url(r'^manofacturer/(\w+)', manufacturerinfo),
+    url(r'^pilot/(\w+)', pilothtmlinfo),
+    url(r'^(\w+)/pilot/(\w+)', pilotinfo),
+    url(r'^', index)
+    #url(r'^pilot/(\w+)', pilotinfo),
     #url(r'^pilot/', include(admin.site.urls))
     #url(r'^user/(\w+)/$', userpage),
 )
