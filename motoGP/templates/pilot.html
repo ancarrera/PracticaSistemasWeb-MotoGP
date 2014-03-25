@@ -1,0 +1,19 @@
+<html>
+	<head>
+		<title>Pilotos en campeonato</title>
+	</head>
+	<body>
+		<h1>Pilotos en campeonato</h1>
+		{% if pilots %}
+		<ul>
+			{% for pilot in pilots %}
+		 <li>
+		 	{{pilot.manofacturer.manofacturer_name}} - {{ pilot.pilot_age}} 
+		 </li>
+			{% endfor %}
+		</ul>
+		{% else %}
+		<p>Aun no se ha añadidos pilotos</p>
+		{% endif %}
+	</body>
+</html>

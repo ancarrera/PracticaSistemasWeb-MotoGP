@@ -1,0 +1,21 @@
+<html>
+	 <head>
+	 	<title>Fabricantes del campeonato</title>
+	 </head>
+	<body>
+		<h1>Fabricantes</h1>
+
+		{% if manofacturers %}
+		<ul>
+			{% for manofacturer in manofacturers %}
+			<li>
+				El fabricante es {{manofacturer.manofacturer_name}} 
+				y su pais es {{manofacturer.country.country_name}}
+			</li>
+			{% endfor %}
+		</ul>
+		{% else %}
+		<p>No hay fabricantes disponibles</p>
+		{% endif %}
+	</body>
+</html>

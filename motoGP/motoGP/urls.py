@@ -1,5 +1,7 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
+from appMotoGP.views import *
+
 
 admin.autodiscover()
 
@@ -13,4 +15,8 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^pilot/$', pilotpage),
+    url(r'^manofacturer/$',manofacturerpage ),
+    #url(r'^pilot/', include(admin.site.urls))
+    #url(r'^user/(\w+)/$', userpage),
 )
