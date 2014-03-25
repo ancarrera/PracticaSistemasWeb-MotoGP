@@ -7,10 +7,9 @@
 
 		{% if manofacturers %}
 		<ul>
-			{% for manofacturer in manofacturers %}
+			{% for manufacturer in manofacturers %}
 			<li>
-				El fabricante es {{manofacturer.manofacturer_name}} 
-				y su pais es {{manofacturer.country.country_name}}
+				 <a href="/manofacturer/{{manufacturer.id}}">{{manufacturer.manofacturer_name}}</a>
 			</li>
 			{% endfor %}
 		</ul>

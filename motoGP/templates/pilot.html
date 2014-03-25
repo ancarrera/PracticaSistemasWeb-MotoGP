@@ -8,7 +8,7 @@
 		<ul>
 			{% for pilot in pilots %}
 		 <li>
-		 	{{pilot.manofacturer.manofacturer_name}} - {{ pilot.pilot_age}} 
+		 	El piloto es <a href="/pilot/{{pilot.id}}">{{pilot.pilot_name}}</a>
 		 </li>
 			{% endfor %}
 		</ul>

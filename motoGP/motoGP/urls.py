@@ -9,7 +9,7 @@ urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'motoGP.views.home', name='home'),
     # url(r'^motoGP/', include('motoGP.foo.urls')),
-
+    #url(r'^pilot/(?P<pk>\d+)/$',),
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
@@ -17,6 +17,10 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^pilot/$', pilotpage),
     url(r'^manofacturer/$',manofacturerpage ),
+    url(r'^country/$',countrypage ),
+    url(r'^category/$',categorypage ),
+    url(r'^pilot/(\w+)', pilotinfo),
+    url(r'^manofacturer/(\w+)', manufacturerinfo),
     #url(r'^pilot/', include(admin.site.urls))
     #url(r'^user/(\w+)/$', userpage),
 )

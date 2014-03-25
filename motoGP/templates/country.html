@@ -1,0 +1,20 @@
+<html>
+	<head>
+		<title>Paises en el campeonato</title>
+	</head>
+	<body>
+		<h1>Paises en el campeonato</h1>
+		<p>Los paises pueden representar tanto a pilotos como a fabricantes.</p>
+		{% if countries %}
+		<ul>
+			{% for country in countries %}
+		 <li>
+		 	El país es {{country.country_name}}
+		 </li>
+			{% endfor %}
+		</ul>
+		{% else %}
+		<p>Aun no se han añadido paises</p>
+		{% endif %}
+	</body>
+</html>

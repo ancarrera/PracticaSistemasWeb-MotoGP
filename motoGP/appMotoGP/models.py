@@ -22,7 +22,7 @@ class Pilot(models.Model):
 	manofacturer = models.ForeignKey(Manofacturer)
 	country = models.ForeignKey(Country)
 	def __unicode__(self):
-		return self.pilot_name +""+ str(pilot_age)
+		return self.pilot_name +" "+ str(self.pilot_age)
 
 
 class Category(models.Model):
