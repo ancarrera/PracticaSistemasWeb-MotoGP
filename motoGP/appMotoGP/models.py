@@ -7,19 +7,19 @@ class Country(models.Model):
 	def __unicode__(self):
 		return self.country_name
 
-class Manofacturer(models.Model):
+class Manufacturer(models.Model):
 
-	manofacturer_name = models.CharField(max_length=40)
+	manufacturer_name = models.CharField(max_length=40)
 	country = models.ForeignKey(Country)
 	def __unicode__(self):
-		return self.manofacturer_name
+		return self.manufacturer_name
 
 class Pilot(models.Model):
 
 	pilot_name = models.CharField(max_length=40)
 	pilot_age = models.IntegerField()
 	race_win = models.IntegerField()
-	manofacturer = models.ForeignKey(Manofacturer)
+	manufacturer = models.ForeignKey(Manufacturer)
 	country = models.ForeignKey(Country)
 	def __unicode__(self):
 		return self.pilot_name +" "+ str(self.pilot_age)
@@ -28,7 +28,7 @@ class Pilot(models.Model):
 class Category(models.Model):
 
 	name = models.CharField(max_length=40)
-	manofacturer = models.ManyToManyField(Manofacturer)
+	manufacturer = models.ManyToManyField(Manufacturer)
 	def __unicode__(self):
 		return self.name
 

@@ -16,7 +16,7 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
     url(r'^pilot/$', pilotpage),
-    #url(r'^manufacturer/$',manufacturerpage ),
+    url(r'^manufacturer/$',manufacturerpage ),
     url(r'^country/$',countrypage ),
     url(r'^category/$',categorypage ),
     url(r'^pilot/(\w+)', pilothtmlinfo),

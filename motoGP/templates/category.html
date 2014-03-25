@@ -12,12 +12,12 @@
 		 	La categoría es {{category.name}} y 
 		 	compiten estos equipos de fabricantes:
 
-		 	{% if category.manofacturer %}
+		 	{% if category.manufacturer %}
 		 	<ul>
 		 		<br/>
-		 		{% for manufacturer in category.manofacturer.all %}
+		 		{% for manufacturer in category.manufacturer.all %}
 		 		<li>
-		 			{{manufacturer.manofacturer_name}}
+		 			{{manufacturer.manufacturer_name}}
 		 		</li>
 		 		{% endfor %} 
 		 	</ul>
