@@ -3,16 +3,39 @@ from django.template import Context
 from django.template.loader import get_template
 from appMotoGP.models import *
 from django.http import HttpResponse, Http404
-from django.views.generic import *
 from django.shortcuts import render_to_response,render
-
 from django.core import serializers
 
+def welcomeindex(request):
+	template = get_template('index_welcome.html')
+	variables = Context({
+			'titlehead': 'MotoGP application',        
+			'pagetitle': 'Bienvenido a MotoGP',
+			'user':getUser(request)
+	})
+	template_render= template.render(variables)
+	return HttpResponse(template_render)
+
+def getUser(request):
+
+	if request.user.is_authenticated():
+		return request.user.username
+	else:
+		return 'anonimo'
+
+def login(request):
+	return render_to_response('registration/login.html')
+
 def indexhtml(request):
-	#return render_to_response(request, 'motoGP/templates/index.html',
-        #content_type="application/xml")
-	return render_to_response('index.html')
-#def index(request, format):
+
+	template = get_template('index.html')
+	variables = Context({
+			'login_user':getUser(request)
+	})
+
+	template_render= template.render(variables)
+	return HttpResponse(template_render)
+
 
 
 def pilotpagehtml(request):
@@ -222,7 +245,4 @@ def categoryinfo(request,form,category_id):
 		})
 		output = template.render(variables)
 		return HttpResponse(output)
-
-
-
 

@@ -14,6 +14,8 @@ urlpatterns = patterns('',
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
     # Uncomment the next line to enable the admin:
+    url(r'^$', welcomeindex),
+    url(r'^login/','django.contrib.auth.views.login'),
     url(r'^index/', indexhtml),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^pilot/$', pilotpagehtml),
@@ -32,11 +34,4 @@ urlpatterns = patterns('',
     url(r'^category/(\w+)',categoryinfohtml),
     url(r'^(\w+)/category/(\w+)',categoryinfo),
     url(r'^(\w+)/category/', categorypage),
-
-
-
-    #url(r'^category/(\w+)',categoryinfo),
-    #url(r'^pilot/(\w+)', pilotinfo),
-    #url(r'^pilot/', include(admin.site.urls))
-    #url(r'^user/(\w+)/$', userpage),
 )
