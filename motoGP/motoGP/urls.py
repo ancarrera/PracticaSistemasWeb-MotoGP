@@ -14,14 +14,28 @@ urlpatterns = patterns('',
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
     # Uncomment the next line to enable the admin:
+    #url(r'^index/', indexhtml),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^pilot/$', pilotpage),
-    url(r'^manufacturer/$',manufacturerpage ),
-    url(r'^country/$',countrypage ),
-    url(r'^category/$',categorypage ),
-    url(r'^pilot/(\w+)', pilothtmlinfo),
+    url(r'^pilot/$', pilotpagehtml),
+    url(r'^pilot/(\w+)', pilotinfohtml),
     url(r'^(\w+)/pilot/(\w+)', pilotinfo),
-    url(r'^', index)
+    url(r'^(\w+)/pilot/', pilotpage),
+    url(r'^manufacturer/$',manufacturerpagehtml),
+    url(r'^manufacturer/(\w+)',manufacturerinfohtml),
+    url(r'^(\w+)/manufacturer/(\w+)',manufacturerinfo),
+    url(r'^(\w+)/manufacturer/', pilotpage), 
+    url(r'^country/$',countrypagehtml ),
+    url(r'^country/(\w+)',countryinfohtml),
+    url(r'^(\w+)/country/(\w+)',countryinfohtml),
+    url(r'^(\w+)/country/', countrypage),
+    url(r'^category/$',categorypagehtml),
+    url(r'^category/(\w+)',categoryinfohtml),
+    url(r'^(\w+)/category/(\w+)',categoryinfo),
+    url(r'^(\w+)/category/', categorypage),
+
+
+
+    #url(r'^category/(\w+)',categoryinfo),
     #url(r'^pilot/(\w+)', pilotinfo),
     #url(r'^pilot/', include(admin.site.urls))
     #url(r'^user/(\w+)/$', userpage),

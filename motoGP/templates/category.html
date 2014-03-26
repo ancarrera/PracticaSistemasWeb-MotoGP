@@ -9,21 +9,7 @@
 		<ul>
 			{% for category in categories %}
 		 <li>
-		 	La categoría es {{category.name}} y 
-		 	compiten estos equipos de fabricantes:
-
-		 	{% if category.manufacturer %}
-		 	<ul>
-		 		<br/>
-		 		{% for manufacturer in category.manufacturer.all %}
-		 		<li>
-		 			{{manufacturer.manufacturer_name}}
-		 		</li>
-		 		{% endfor %} 
-		 	</ul>
-		 	{% else %}
-			<p>Aún no se ha añadido fabricantes</p>
-			{% endif %}
+		 	<a href="/category/{{category.id}}"> {{category.name}} </a>
 		</li>
 		{% endfor %} 
 		</ul>
