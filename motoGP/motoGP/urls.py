@@ -34,4 +34,5 @@ urlpatterns = patterns('',
     url(r'^category/(\w+)',categoryinfohtml),
     url(r'^(\w+)/category/(\w+)',categoryinfo),
     url(r'^(\w+)/category/', categorypage),
+    url(r'^user/', newuser)
 )

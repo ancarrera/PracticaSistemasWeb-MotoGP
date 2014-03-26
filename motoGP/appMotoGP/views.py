@@ -1,10 +1,15 @@
 # Create your views here.
-from django.template import Context
+from django.template import Context, RequestContext
 from django.template.loader import get_template
 from appMotoGP.models import *
-from django.http import HttpResponse, Http404
+from django.http import HttpResponse, Http404,HttpResponseRedirect
 from django.shortcuts import render_to_response,render
 from django.core import serializers
+
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth.decorators import login_required
 
 def welcomeindex(request):
 	template = get_template('index_welcome.html')
@@ -245,4 +250,18 @@ def categoryinfo(request,form,category_id):
 		})
 		output = template.render(variables)
 		return HttpResponse(output)
+
+#Registro
+def newuser(request):
+	if request.method=='POST':
+		form = UserCreationForm(request.POST)
+		if form.is_valid:
+			form.save()
+			return HttpResponseRedirect('/')
+	else:
+		form = UserCreationForm()
+		return render_to_response('newuser.html',{'form':form},context_instance=RequestContext(request))
+
+
+
 
