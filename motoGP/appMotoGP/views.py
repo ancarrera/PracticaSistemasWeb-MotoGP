@@ -8,10 +8,10 @@ from django.shortcuts import render_to_response,render
 
 from django.core import serializers
 
-#def indexhtml(request):
+def indexhtml(request):
 	#return render_to_response(request, 'motoGP/templates/index.html',
         #content_type="application/xml")
-	#return render_to_response('index.html')
+	return render_to_response('index.html')
 #def index(request, format):
 
 
