@@ -1,0 +1,17 @@
+<html>
+	<head>
+		<title>Información de fabricantes</title>
+	</head>
+	<body>
+		<h1>Información de fabricantes</h1>
+		
+		<ul>
+		 <li>
+		 	El nombre del fabricante es {{manufacturer.manufacturer_name}} 
+		 	y es de <a href="/country/{{manufacturer.country.id}}"> {{manufacturer.country.country_name}}</a>.
+		 </li>
+		</ul>
+		<input type="button" value="Volver a inicio" onClick=location.href="/index/" />
+	</body>
+
+</html>

@@ -1,0 +1,15 @@
+<html>  
+<head>  
+	<title>{{titlehead}}</title> 
+ </head> 
+ <body>  
+ 	<h1>{{ pagetitle }}</h1>
+	{% if user != 'anonimo' %} 
+	<p>¡Bienvenido {{ user }} !, a la web sobre información de motoGP</p> 
+	<input type="button" value="Ir al contenido" onClick=location.href="/index/" />
+	{% else %} 
+	<p>Bienvenido {{ user }}: Es obligario <a href="/login/">sign in</a> para consultar información</p> 
+
+{% endif %}
+</body> 
+</html>

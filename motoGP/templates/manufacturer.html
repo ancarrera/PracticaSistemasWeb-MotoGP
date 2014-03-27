@@ -1,0 +1,22 @@
+<html>
+	 <head>
+	 	<title>Fabricantes del campeonato</title>
+	 </head>
+	<body>
+		<h1>Fabricantes del campeonato</h1>
+
+		{% if manufacturers %}
+		<ul>
+			{% for manufacturer in manufacturers %}
+			<li>
+				 <a href="/manufacturer/{{manufacturer.id}}">{{manufacturer.manufacturer_name}}</a>
+			</li>
+			{% endfor %}
+		</ul>
+		{% else %}
+		<p>No hay fabricantes disponibles</p>
+		{% endif %}
+		<input type="button" value="Volver a inicio" onClick=location.href="/index/" />
+	</body>
+
+</html>

@@ -1,0 +1,30 @@
+<html>
+	<head>
+
+		<title>Información de pilotos</title>
+	</head>
+	<body>
+		<h1>Información de pilotos</h1>
+		<ul>
+		 	<li>
+		 	 El nombre del piloto es{{pilot.pilot_name}}.
+		 	</li>
+		 	<li>
+		 	 El piloto tiene {{pilot.pilot_age}} años.
+		 	</li>
+		 	<li>
+		 	 Ha ganado {{pilot.races_win}} carreras.
+		 	</li>
+		 	<li>
+		 	 Corre para el fabricante <a href="/manufacturer/{{pilot.manufacturer.id}}">
+		 	 {{pilot.manufacturer.manufacturer_name}}. </a>
+		 	</li>
+		 	<li>
+		 	 Su nacionalidad es <a href="/country/{{pilot.country.id}}">{{pilot.country.country_name}}.</a>
+		 	</li>
+		</ul>
+
+			<input type="button" value="Volver a inicio" onClick=location.href="/index/" />
+
+	</body>
+</html>

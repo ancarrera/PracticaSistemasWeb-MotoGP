@@ -1,0 +1,23 @@
+<html>
+	<head>
+
+		<title>Fabricantes por categoría</title>
+	</head>
+	<body>
+		<h1>Fabricantes por categoría</h1>
+		{{category.description}}
+		{% if category.manufacturer %}
+		<ul>
+			{% for manufacturer in category.manufacturer.all %}
+		 <li>
+		 	<a href="/manufacturer/{{manufacturer.id}}"> {{manufacturer.manufacturer_name}} </a>
+		</li>
+		{% endfor %} 
+		</ul>
+		{% else %}
+		<p>Aún no se ha añadido fabricantes para esta categoría</p>
+		{% endif %}
+		<input type="button" value="Volver a inicio" onClick=location.href="/index/" />
+	</body>
+
+</html>
