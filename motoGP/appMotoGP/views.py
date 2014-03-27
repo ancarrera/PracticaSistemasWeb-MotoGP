@@ -262,23 +262,23 @@ def categoryinfo(request,form,category_id):
 #para el registro
 class UserCreateForm(UserCreationForm):
 	username = forms.CharField(label="Introduce usuario")
-	email = forms.EmailField(label="Introduce un email")
 	first_name = forms.CharField(label="Introduce tu nombre")
-	second_name = forms.CharField(label="Introduce tus apellidos")
+	last_name = forms.CharField(label="Introduce tus apellidos")
+	email = forms.EmailField(label="Introduce un email")
 	password1 = forms.CharField(label="Password",widget=forms.PasswordInput)
 	password2 = forms.CharField(label="Repite password", widget=forms.PasswordInput)
 
 
 	class Meta(UserCreationForm.Meta):
 		model = User
-		fields = ("username","first_name","second_name","email","password1","password2",)
+		fields = ("username","first_name","last_name","email","password1","password2",)
 
 	def save(self, commit=True):
 		user = super(UserCreationForm, self).save(commit=False)
 		user.email=self.cleaned_data["email"]
 		user.set_password(self.cleaned_data["password1"])
 		user.username = self.cleaned_data["username"]
-		user.second_name = self.cleaned_data["second_name"]
+		user.last_name = self.cleaned_data["last_name"]
 		user.first_name = self.cleaned_data["first_name"]
 		if commit:
 			user.save()
