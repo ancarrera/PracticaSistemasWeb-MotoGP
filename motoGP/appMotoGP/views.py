@@ -256,42 +256,45 @@ def categoryinfo(request,form,category_id):
 #crear nuevo usuario
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
-"""
+#creamos subclase de UserCreationForm para que nos cree el formulario 
+#para el registro
 class UserCreateForm(UserCreationForm):
-	username = forms.CharField(label="Usuario")
-	email = forms.EmailField(label="Introduce un email",required=False)
-	#password1 = forms.CharField(label="Password",widget=forms.PasswordInput)
-	#password2 = forms.CharField(label="Repite password", widget=forms.PasswordInput)
+	username = forms.CharField(label="Introduce usuario")
+	email = forms.EmailField(label="Introduce un email")
+	password1 = forms.CharField(label="Password",widget=forms.PasswordInput)
+	password2 = forms.CharField(label="Repite password", widget=forms.PasswordInput)
 
 
-	class Meta:
+	class Meta(UserCreationForm.Meta):
 		model = User
-		fields = ( "email",)
+		fields = ("username","email",'password1','password2',)
 
 	def save(self, commit=True):
 		user = super(UserCreationForm, self).save(commit=False)
-		user.email = self.cleaned_data["email"]
+		user.email=(self.cleaned_data["email"])
+		user.set_password(self.cleaned_data["password1"])
+		user.username=(self.cleaned_data["username"])
 		if commit:
 			user.save()
 			return user
-"""
+
 
 def newuser(request):
 	if request.method=='POST':
-		form = UserCreationForm(request.POST)
+		form = UserCreateForm(request.POST)
 		if form.is_valid():
 			form.save()
 			return HttpResponseRedirect('/')
 	else:
-		form = UserCreationForm()
-	return render_to_response('newuser.html',
+		form = UserCreateForm()
+	return render_to_response('registration/newuser.html',
 		   {'form':form},context_instance=RequestContext(request))
 
 #obtener el perfil de usuario
 
 def profileinfo(request):
 
-	template = get_template('userprofile.html')
+	template = get_template('userProfile/userprofile.html')
 	user=User.objects.get(username__exact=request.user.username)
 	user_name = user.username
 	user_mail = user.email
@@ -303,4 +306,8 @@ def profileinfo(request):
 		})
 	output = template.render(variables)
 	return HttpResponse(output)
+
+def logout(request):
+  logout(request)
+  return redirect('appMotoGP.views.login')
 

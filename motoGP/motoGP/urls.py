@@ -35,5 +35,8 @@ urlpatterns = patterns('',
     url(r'^(\w+)/category/(\w+)',categoryinfo),
     url(r'^(\w+)/category/', categorypage),
     url(r'^user/', newuser),
-    url(r'^user_profile/', profileinfo)
+    url(r'^user_profile/', profileinfo),
+    url(r'^user_profile/change_password/', profileinfo),
+    url(r'^index/#', logout),
+
 )
