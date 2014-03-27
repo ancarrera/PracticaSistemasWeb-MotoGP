@@ -311,7 +311,7 @@ def profileinfo(request):
 			'user_name':user_name,
 			'user_email':user_mail,
 			'user_first_name':user_first_name,
-			'user_last_name':user_last_name
+			'user_last_name':user_last_name,
 		})
 	output = template.render(variables)
 	return HttpResponse(output)
