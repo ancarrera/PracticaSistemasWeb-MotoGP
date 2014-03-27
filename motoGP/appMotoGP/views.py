@@ -256,7 +256,7 @@ def categoryinfo(request,form,category_id):
 		output = template.render(variables)
 		return HttpResponse(output)
 
-#crear nuevo usuario
+#TRATAMIENTO DE USUARIOS
 
 #creamos subclase de UserCreationForm para que nos cree el formulario 
 #para el registro
@@ -284,6 +284,7 @@ class UserCreateForm(UserCreationForm):
 			user.save()
 			return user
 
+#crear un nuevo usuario
 
 def newuser(request):
 	if request.method=='POST':
@@ -304,24 +305,16 @@ def profileinfo(request):
 	user=User.objects.get(username__exact=request.user.username)
 	user_name = user.username
 	user_mail = user.email
-	user_password = user.password
+	user_first_name = user.first_name
+	user_last_name = user.last_name
 	variables = Context({
 			'user_name':user_name,
 			'user_email':user_mail,
-			'user_password':user_password,
+			'user_first_name':user_first_name,
+			'user_last_name':user_last_name
 		})
 	output = template.render(variables)
 	return HttpResponse(output)
 
-#from django.contrib.auth import logout
 
-#def logout(request):
-   #logout(request)
-def logout_page(request, *args, **kwargs):
-    logout(request, *args, **kwargs)
-"""
-def logout(request):
-  logout(request)
-  return redirect('appMotoGP.views.login')
-"""
 

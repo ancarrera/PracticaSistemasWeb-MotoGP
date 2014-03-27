@@ -9,7 +9,7 @@
 		<ul>
 			{% for country in countries %}
 		 <li>
-		 	{{country.country_name}}
+		 	<a href="/country/{{country.id}}">{{country.country_name}}</a>
 		 </li>
 			{% endfor %}
 		</ul>

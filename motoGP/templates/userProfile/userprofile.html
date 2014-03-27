@@ -1,19 +1,13 @@
 <html>
 	<head>
 		<title>Perfil de usuario</title>
-
 	</head>
 	<body>
 		<h1>Perfil de usuario</h1>
-		<p> El nombre de usuario es {{ user_name }}</p>
-		<p><input type="button" value="Cambiar usuario" 
-		       onClick=location.href="/index/"/></p>
-		<p> Tu contraseña es {{user_password}}</p>
-		<p><input type="button" value="Cambiar contraseña" 
-		       onClick=location.href="change_password/"/></p>
-		<p> {{user_email}}</p>
-			
-
-		<input type="button" value="Volver a inicio" onClick=location.href="/index/" /
+		<p> Usuario: {{user_name }}</p>
+		<p> Nombre: {{user_first_name}}</p>
+		<p> Apellidos: {{user_last_name}}</p>
+		<p> Email:{{user_email}} </p>	
+		<input type="button" value="Volver a inicio" onClick=location.href="/index/" />
 	</body>
 </html>
