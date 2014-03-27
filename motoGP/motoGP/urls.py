@@ -1,5 +1,6 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
+from django.contrib.auth.views import logout
 from appMotoGP.views import *
 
 
@@ -15,6 +16,7 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     url(r'^$', welcomeindex),
+    url(r'^/$', welcomeindex),
     url(r'^login/','django.contrib.auth.views.login'),
     url(r'^index/', indexhtml),
     url(r'^admin/', include(admin.site.urls)),
@@ -37,6 +39,9 @@ urlpatterns = patterns('',
     url(r'^user/', newuser),
     url(r'^user_profile/', profileinfo),
     url(r'^user_profile/change_password/', profileinfo),
-    url(r'^index/#', logout),
-
+    #url(r'^(\w+)/logout/', 'django.contrib.auth.views.logout',{'next_page': '/'}),
+    #url(r'^/index/logout/(?P<next_page>.*)/$', 'django.contrib.auth.views.logout', name='auth_logout_next'),
+    url(r'^logout/', 'django.contrib.auth.views.logout', {'next_page': '/'}),
+    
+    #url(r'^/logout/login/$',welcomeindex ),
 )

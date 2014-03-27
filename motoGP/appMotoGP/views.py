@@ -6,12 +6,15 @@ from django import forms
 from django.http import HttpResponse, Http404,HttpResponseRedirect
 from django.shortcuts import render_to_response,render
 from django.core import serializers
+from django.contrib.auth.forms import UserCreationForm
+from django import forms
 
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.contrib.auth.views import logout
 
 def welcomeindex(request):
 	template = get_template('index_welcome.html')
@@ -254,26 +257,29 @@ def categoryinfo(request,form,category_id):
 		return HttpResponse(output)
 
 #crear nuevo usuario
-from django.contrib.auth.forms import UserCreationForm
-from django import forms
+
 #creamos subclase de UserCreationForm para que nos cree el formulario 
 #para el registro
 class UserCreateForm(UserCreationForm):
 	username = forms.CharField(label="Introduce usuario")
 	email = forms.EmailField(label="Introduce un email")
+	first_name = forms.CharField(label="Introduce tu nombre")
+	second_name = forms.CharField(label="Introduce tus apellidos")
 	password1 = forms.CharField(label="Password",widget=forms.PasswordInput)
 	password2 = forms.CharField(label="Repite password", widget=forms.PasswordInput)
 
 
 	class Meta(UserCreationForm.Meta):
 		model = User
-		fields = ("username","email",'password1','password2',)
+		fields = ("username","first_name","second_name","email","password1","password2",)
 
 	def save(self, commit=True):
 		user = super(UserCreationForm, self).save(commit=False)
-		user.email=(self.cleaned_data["email"])
+		user.email=self.cleaned_data["email"]
 		user.set_password(self.cleaned_data["password1"])
-		user.username=(self.cleaned_data["username"])
+		user.username = self.cleaned_data["username"]
+		user.second_name = self.cleaned_data["second_name"]
+		user.first_name = self.cleaned_data["first_name"]
 		if commit:
 			user.save()
 			return user
@@ -307,7 +313,15 @@ def profileinfo(request):
 	output = template.render(variables)
 	return HttpResponse(output)
 
+#from django.contrib.auth import logout
+
+#def logout(request):
+   #logout(request)
+def logout_page(request, *args, **kwargs):
+    logout(request, *args, **kwargs)
+"""
 def logout(request):
   logout(request)
   return redirect('appMotoGP.views.login')
+"""
 
