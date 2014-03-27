@@ -2,6 +2,7 @@
 from django.template import Context, RequestContext
 from django.template.loader import get_template
 from appMotoGP.models import *
+from django import forms
 from django.http import HttpResponse, Http404,HttpResponseRedirect
 from django.shortcuts import render_to_response,render
 from django.core import serializers
@@ -10,6 +11,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 
 def welcomeindex(request):
 	template = get_template('index_welcome.html')
@@ -251,17 +253,54 @@ def categoryinfo(request,form,category_id):
 		output = template.render(variables)
 		return HttpResponse(output)
 
-#Registro
+#crear nuevo usuario
+from django.contrib.auth.forms import UserCreationForm
+from django import forms
+"""
+class UserCreateForm(UserCreationForm):
+	username = forms.CharField(label="Usuario")
+	email = forms.EmailField(label="Introduce un email",required=False)
+	#password1 = forms.CharField(label="Password",widget=forms.PasswordInput)
+	#password2 = forms.CharField(label="Repite password", widget=forms.PasswordInput)
+
+
+	class Meta:
+		model = User
+		fields = ( "email",)
+
+	def save(self, commit=True):
+		user = super(UserCreationForm, self).save(commit=False)
+		user.email = self.cleaned_data["email"]
+		if commit:
+			user.save()
+			return user
+"""
+
 def newuser(request):
 	if request.method=='POST':
 		form = UserCreationForm(request.POST)
-		if form.is_valid:
+		if form.is_valid():
 			form.save()
 			return HttpResponseRedirect('/')
 	else:
 		form = UserCreationForm()
-		return render_to_response('newuser.html',{'form':form},context_instance=RequestContext(request))
+	return render_to_response('newuser.html',
+		   {'form':form},context_instance=RequestContext(request))
 
+#obtener el perfil de usuario
 
+def profileinfo(request):
 
+	template = get_template('userprofile.html')
+	user=User.objects.get(username__exact=request.user.username)
+	user_name = user.username
+	user_mail = user.email
+	user_password = user.password
+	variables = Context({
+			'user_name':user_name,
+			'user_email':user_mail,
+			'user_password':user_password,
+		})
+	output = template.render(variables)
+	return HttpResponse(output)
 
