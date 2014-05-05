@@ -1,15 +1,16 @@
-<html>
-	<head>
-		<title>Información del país</title>
-	</head>
-	<body>
+{% extends "base.html" %}
+
+		{% block title %}Información del país{% endblock %}
+
+		{% block header %}
 		<h1>Información del país</h1>
+		{% endblock %}
+
+		{% block content %}
 		<ul>
 			 <li>
 			 	 {{country.description}}
 			 </li>	
 		</ul>
 		<input type="button" value="Volver a inicio" onClick=location.href="/index/" />
-	</body>
-	
-</html>
+	{% endblock %}

@@ -1,0 +1,19 @@
+@import "base.css";
+
+.titles {
+	margin-top:100px;
+}
+
+h4 {
+		text-align:center;
+		font-weight:normal;
+		font-size:1.2em;
+		color:#808080;
+	}
+
+#error{
+
+		text-align:center;
+		font-weight:normal;
+	}
+

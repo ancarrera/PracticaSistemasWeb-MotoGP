@@ -1,11 +1,13 @@
-<html>
-	<head>
-		<title>Web MotoGP</title>
-	</head>
-	<body>
+{% extends "base.html" %}
+
+		{% block title %}Web MotoGP{% endblock %}
+
+		{% block header %}
 		<h1>Web MotoGP</h1>
+		{% endblock %}
+
+		{% block content %}
 		<p>Identificado como <strong>{{login_user}}</strong></p>
-		
 		<ul>
 			<li>
 				<a href="/pilot/">Pilotos</a>
@@ -27,8 +29,24 @@
 				<br></br>
 			</li>
 		</ul>
-		<p><input type="button" value="Perfil de usuario" onClick=location.href="/user_profile/" />  |  <input type="button" value="Cerrar sesion" onClick=location.href="/logout/" /></p>
-		<!--<p><a href='/user_profile/'>User profile</a> |
-		<a href='/login/#'>Cerrar sesión</a></p>-->
-	</body>
-</html>
+		<p><input type="button" value="Perfil de usuario" onClick=location.href="/user_profile/" />  |  <input type="button" value="Cerrar sesion" onClick=location.href="/logout/" /></p> 
+			<p>
+		{% if user.is_superuser %}
+		<input type="button" value="Crear usuario especial" onClick=location.href="/specialUser/" /></p>
+		<p><input type="button" value="Crear piloto" onClick=location.href="/create/" /></p>
+		{% else %}
+		{% if groups %}
+
+			{% for group in groups%}
+			
+			{% if group.name == 'special_user' %}
+
+					<p><input type="button" value="Crear piloto" onClick=location.href="/create/" /></p>
+    					{{break}}
+    		{% endif %}
+
+			{% endfor %}
+		{% endif %}
+		{% endif %}
+		    					
+	{% endblock %}

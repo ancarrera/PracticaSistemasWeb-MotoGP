@@ -1,10 +1,12 @@
-<html>
-	<head>
+{% extends "base.html" %}
 
-		<title>Categorías</title>
-	</head>
-	<body>
+		{% block title %}Categorías{% endblock %}
+
+		{% block header %}
 		<h1>Categorías</h1>
+		{% endblock %}
+
+		{% block content %}
 		{% if categories %}
 		<ul>
 			{% for category in categories %}
@@ -17,6 +19,4 @@
 		<p>Aún no se ha añadido categorías</p>
 		{% endif %}
 		<input type="button" value="Volver a inicio" onClick=location.href="/index/" />
-	</body>
-
-</html>
+	{% endblock %}

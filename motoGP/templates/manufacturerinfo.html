@@ -1,9 +1,12 @@
-<html>
-	<head>
-		<title>Información de fabricantes</title>
-	</head>
-	<body>
+{% extends "base.html" %}
+
+		{% block title %}Información de fabricantes{% endblock %}
+
+		{% block header %}
 		<h1>Información de fabricantes</h1>
+		{% endblock %}
+
+		{% block content %}
 		<ul>
 		 <li>
 		 	El nombre del fabricante es {{manufacturer.manufacturer_name}} 
@@ -11,6 +14,4 @@
 		 </li>
 		</ul>
 		<input type="button" value="Volver a inicio" onClick=location.href="/index/" />
-	</body>
-
-</html>
+	{% endblock %}

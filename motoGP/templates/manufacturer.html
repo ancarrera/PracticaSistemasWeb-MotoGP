@@ -1,9 +1,12 @@
-<html>
-	 <head>
-	 	<title>Fabricantes del campeonato</title>
-	 </head>
-	<body>
+{% extends "base.html" %}
+
+	 	{% block title %}Fabricantes del campeonato{% endblock %}
+
+	 	{% block header %}
 		<h1>Fabricantes del campeonato</h1>
+		{% endblock %}
+
+		{% block content %}
 		{% if manufacturers %}
 		<ul>
 			{% for manufacturer in manufacturers %}
@@ -16,6 +19,4 @@
 		<p>No hay fabricantes disponibles</p>
 		{% endif %}
 		<input type="button" value="Volver a inicio" onClick=location.href="/index/" />
-	</body>
-
-</html>
+	{% endblock %}

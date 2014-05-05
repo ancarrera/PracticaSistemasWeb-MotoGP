@@ -1,13 +1,16 @@
-<html>
-	<head>
-		<title>Perfil de usuario</title>
-	</head>
-	<body>
+{% extends "base.html" %}
+
+		{% block title %}Perfil de usuario{% endblock %}
+
+		{% block header %}
 		<h1>Perfil de usuario</h1>
-		<p> <strong>Usuario: </strong> {{user_name }}</p>
-		<p> <strong>Nombre: </strong>{{user_first_name}}</p>
-		<p> <strong>Apellidos: </strong>{{user_last_name}}</p>
-		<p> <strong>Email: </strong>{{user_email}} </p>	
+		{% endblock %}
+
+		{% block content %}
+		<p> <strong>Usuario: </strong> {{user_name }}    <a href="/change_username/"> Cambiar usuario</a></p>
+		<p> <strong>Nombre: </strong>{{user_first_name}}   <a href="/change_firstname/"> Cambiar nombre</a></p>
+		<p> <strong>Apellidos: </strong>{{user_last_name}} <a href="/change_secondname/"> Cambiar apellidos</a> </p>
+		<p> <strong>Email: </strong>{{user_email}} <a href="/change_email/"> Cambiar email</a> </p>	
+		<p> <a href="/change_password/"> Cambiar contraseña</a> </p>
 		<input type="button" value="Volver a inicio" onClick=location.href="/index/" />
-	</body>
-</html>
+	    {% endblock %}

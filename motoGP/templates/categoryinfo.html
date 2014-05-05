@@ -1,10 +1,12 @@
-<html>
-	<head>
+{% extends "base.html" %}
 
-		<title>Fabricantes por categoría</title>
-	</head>
-	<body>
+		{% block title %}Fabricantes por categoría{% endblock %}
+
+		{% block header %}
 		<h1>Fabricantes por categoría</h1>
+		{% endblock %}
+
+		{% block content %}
 		{{category.description}}
 		{% if category.manufacturer %}
 		<ul>
@@ -18,6 +20,4 @@
 		<p>Aún no se ha añadido fabricantes para esta categoría</p>
 		{% endif %}
 		<input type="button" value="Volver a inicio" onClick=location.href="/index/" />
-	</body>
-
-</html>
+	{% endblock %}

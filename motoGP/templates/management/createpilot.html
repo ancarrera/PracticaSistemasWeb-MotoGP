@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load staticfiles %}		
+{% block title %} Crear piloto {% endblock %}
+
+{%block header %}
+<script type="text/javascript" src="{% static "javascript/alertform.js" %}">
+	
+</script>
+<h1> Crear un nuevo piloto</h1> 
+{% endblock %}
+
+{% block content %}
+
+<form method="post" onsubmit="return validateForm()">
+		{% csrf_token %}
+		<table>
+			{{form.as_table }}
+		</table>
+		<input type="submit" value="Submit"/>
+</form>
+
+{% endblock %}

@@ -1,10 +1,12 @@
-<html>
-	<head>
+{% extends "base.html" %}
 
-		<title>Información de pilotos</title>
-	</head>
-	<body>
+		{% block title %}Información de pilotos{% endblock %}
+		
+		{% block header %}		
 		<h1>Información de pilotos</h1>
+		{% endblock %}
+
+		{% block content %}
 		<ul>
 		 	<li>
 		 	 El nombre del piloto es{{pilot.pilot_name}}.
@@ -26,5 +28,4 @@
 
 			<input type="button" value="Volver a inicio" onClick=location.href="/index/" />
 
-	</body>
-</html>
+	{% endblock %}

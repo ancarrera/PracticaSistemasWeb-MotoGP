@@ -1,9 +1,12 @@
-<html>
-	<head>
-		<title>Paises en el campeonato</title>
-	</head>
-	<body>
+{% extends "base.html" %}
+
+		{% block title %}Paises en el campeonato{% endblock %}
+
+		{% block header %}
 		<h1>Paises en el campeonato</h1>
+		{% endblock %}
+
+		{% block content %}
 		<p>Los paises pueden representar tanto a pilotos como a fabricantes.</p>
 		{% if countries %}
 		<ul>
@@ -17,6 +20,4 @@
 		<p>Aun no se han añadido paises</p>
 		{% endif %}
 		<input type="button" value="Volver a inicio" onClick=location.href="/index/" />
-	</body>
-
-</html>
+	{% endblock %}

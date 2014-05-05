@@ -1,7 +1,9 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
+from django.views.generic import *
 from django.contrib.auth.views import logout
 from appMotoGP.views import *
+from appMotoGP.form import *
 
 
 admin.autodiscover()
@@ -38,10 +40,12 @@ urlpatterns = patterns('',
     url(r'^(\w+)/category/', categorypage),
     url(r'^user/', newuser),
     url(r'^user_profile/', profileinfo),
-    url(r'^user_profile/change_password/', profileinfo),
-    #url(r'^(\w+)/logout/', 'django.contrib.auth.views.logout',{'next_page': '/'}),
-    #url(r'^/index/logout/(?P<next_page>.*)/$', 'django.contrib.auth.views.logout', name='auth_logout_next'),
+    url(r'^change_password/', changepassword),
+    url(r'^change_username/', changeusername),
+    url(r'^change_firstname/', changefirstname),
+    url(r'^change_secondname/', changesecondname),
+    url(r'^change_email/', changeemail),
     url(r'^logout/', 'django.contrib.auth.views.logout', {'next_page': '/'}),
-    
-    #url(r'^/logout/login/$',welcomeindex ),
+    url(r'^specialUser/',newuser),
+    url(r'^create/$', CreatePilot.as_view(), name='pilot_create'),
 )
