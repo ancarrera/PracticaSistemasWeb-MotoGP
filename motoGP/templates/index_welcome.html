@@ -7,9 +7,9 @@
 
  	{% block content %}
 	{% if user != 'anonimo' %} 
-	<p>¡Bienvenido {{ user }} !, a la web sobre información de motoGP</p> 
+	<p>¡Bienvenido <strong>{{ user }}</strong> !, a la web sobre información de motoGP</p> 
 	<input type="button" value="Ir al contenido" onClick=location.href="/index/" />
 	{% else %} 
-	<p>Bienvenido {{ user }}: Es obligario <a href="/login/">sign in</a> para consultar información.</p> 
+	<p>Bienvenido <strong>{{ user }}</strong>: Es obligario <a href="/login/">sign in</a> para consultar información.</p> 
 	{% endif %}
 	{% endblock %}

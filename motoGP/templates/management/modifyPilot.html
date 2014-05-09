@@ -6,10 +6,8 @@
 <script type="text/javascript" src="{% static "javascript/alertform.js" %}">
 	
 </script>
-<h1> Crear un nuevo piloto</h1> 
+<h1> Modificar un piloto</h1> 
 {% endblock %}
-
-
 
 {% block content %}
 
@@ -18,13 +16,7 @@
 		<table>
 			{{form.as_table }}
 		</table>
-		<br />
 		<input type="submit" value="Submit"/>
-
 </form>
-	
-	<br />
-	<br />
 
-		<input type="button" value="Volver a inicio" onClick=location.href="/index/" />
 {% endblock %}

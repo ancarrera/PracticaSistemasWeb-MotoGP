@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{%block header %}
+ <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+ <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+	<script type="text/javascript" src="{% static "javascript/listenform.js" %}"></script>
+{% endblock %}
+{% block content %}
+
+<form action="" method="post">{% csrf_token %}
+    <p>¿Estas seguro que quieres borrar "{{ object }}"?</p>
+    <input type="submit" id="confirm" value="Confirmar" />
+    <input type="submit" id="cancel" value="Cancelar" />
+</form>
+
+{% endblock %}

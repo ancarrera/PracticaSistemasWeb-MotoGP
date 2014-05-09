@@ -15,7 +15,7 @@
 		 	 El piloto tiene {{pilot.pilot_age}} años.
 		 	</li>
 		 	<li>
-		 	 Ha ganado {{pilot.races_win}} carreras.
+		 	 Ha ganado {{pilot.race_win}} carreras.
 		 	</li>
 		 	<li>
 		 	 Corre para el fabricante <a href="/manufacturer/{{pilot.manufacturer.id}}">
@@ -25,7 +25,10 @@
 		 	 Su nacionalidad es <a href="/country/{{pilot.country.id}}">{{pilot.country.country_name}}.</a>
 		 	</li>
 		</ul>
+		<br />
+		<br />
 
-			<input type="button" value="Volver a inicio" onClick=location.href="/index/" />
+		<p><input type="button" value="Atras" onClick=location.href="/pilot/" /> |
+		<input type="button" value="Volver a inicio" onClick=location.href="/index/" /></p>
 
 	{% endblock %}

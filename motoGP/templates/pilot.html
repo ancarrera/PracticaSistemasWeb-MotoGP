@@ -11,12 +11,31 @@
 		<ul>
 			{% for pilot in pilots %}
 		 <li>
-		 	 <a href="/pilot/{{pilot.id}}">{{pilot.pilot_name}}</a>
+		 	 <a href="/pilot/{{pilot.id}}">{{pilot.pilot_name}} </a> 
+		 	 
+
+			{% if user.is_superuser %}
+		
+				<p><input type="button" value="Modificar" onClick=location.href="/pilot/{{pilot.id}}/modify/" /> |
+				<input type="button" value="Eliminar" onClick=location.href="/pilot/{{pilot.id}}/delete/" /></p>
+
+			{% else %}
+				{% if group %}
+
+				<p><input type="button" value="Modificar" onClick=location.href="/pilot/{{pilot.id}}/modify/" /> |
+				<input type="button" value="Eliminar" onClick=location.href="/pilot/{{pilot.id}}/delete/" /></p>
+				{% endif %}
+
+			{% endif %}
+		
 		 </li>
 			{% endfor %}
 		</ul>
 		{% else %}
 		<p>Aun no se ha añadidos pilotos</p>
 		{% endif %}
-		<input type="button" value="Volver a inicio" onClick=location.href="/index/" />
+		<br />
+		<br />
+		<p><input type="button" value="Atras" onClick=location.href="/index/" /> |
+		<input type="button" value="Volver a inicio" onClick=location.href="/index/" /></p>
 	{% endblock %}

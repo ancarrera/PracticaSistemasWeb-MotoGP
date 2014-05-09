@@ -29,24 +29,26 @@
 				<br></br>
 			</li>
 		</ul>
-		<p><input type="button" value="Perfil de usuario" onClick=location.href="/user_profile/" />  |  <input type="button" value="Cerrar sesion" onClick=location.href="/logout/" /></p> 
-			<p>
+		
 		{% if user.is_superuser %}
-		<input type="button" value="Crear usuario especial" onClick=location.href="/specialUser/" /></p>
-		<p><input type="button" value="Crear piloto" onClick=location.href="/create/" /></p>
+		
+		<h3>{{special_user_head}}<h3>
+
+		<p><input type="button" value="Crear usuario especial" onClick=location.href="/specialUser/" /></p>
+
+		<p><input type="button" value="Crear piloto" onClick=location.href="/create/new_pilot/" /></p>
+
 		{% else %}
-		{% if groups %}
 
-			{% for group in groups%}
-			
-			{% if group.name == 'special_user' %}
+			{% if group %}
 
-					<p><input type="button" value="Crear piloto" onClick=location.href="/create/" /></p>
-    					{{break}}
+					<h3>{{special_user_head}}<h3>
+
+					<p><input type="button" value="Crear piloto" onClick=location.href="/create/new_pilot/" /></p>
     		{% endif %}
+		{% endif %}
 
-			{% endfor %}
-		{% endif %}
-		{% endif %}
-		    					
+		 <br />
+		 <br />
+		<p><input type="button" value="Perfil de usuario" onClick=location.href="/user_profile/" />  |  <input type="button" value="Cerrar sesion" onClick=location.href="/logout/" /></p> 				
 	{% endblock %}

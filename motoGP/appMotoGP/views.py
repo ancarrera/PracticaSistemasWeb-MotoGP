@@ -1,23 +1,16 @@
 # Create your views here.
 from django.template import Context, RequestContext
-from django.template.loader import get_template
-from django import forms
-from django.http import HttpResponse, Http404,HttpResponseRedirect
-from django.shortcuts import render_to_response,render
 from django.core import serializers
-from django.contrib.auth.forms import UserCreationForm
-from django import forms
 from django.views.generic import *
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User,Group
+from django.contrib.auth.models import Group
 from django.contrib.auth.views import logout
-from django.views.generic.edit import CreateView
-from appMotoGP.models import *
-from django.forms import ModelForm
+from django.views.generic.edit import CreateView,UpdateView
 from rest_framework import generics, permissions
+from itertools import chain
+from forms import *
+from userviews import *
 
 
 
@@ -45,15 +38,35 @@ def login(request):
 def indexhtml(request):
 
 	template = get_template('index.html')
-	groups = request.user.groups.all()
+	group = checkEspecialUserGroup(request.user)
 	variables = Context({
 			'login_user':getUser(request),
 			'user':request.user,
-			'groups': groups
+			'group':group,
+			'special_user_head':'Apartado para usuarios con permisos especiales'
 	})
 
 	template_render= template.render(variables)
 	return HttpResponse(template_render)
+
+
+def checkEspecialUserGroup(user):
+
+	group_especial_user = None
+	for group in user.groups.all():
+		if group.name == 'special_user':
+			group_especial_user = group
+
+	return group_especial_user
+
+
+def createSerializerList(pilot_list, user, group):
+
+	serializer_list = pilot_list
+	serializer_list.append(user)
+	if group != None:
+		serializer_list.append(group)
+	return serializer_list
 
 
 @login_required(login_url='/login/')
@@ -65,17 +78,33 @@ def pilotpagehtml(request):
 def pilotpage(request,format):
 
 	template = get_template('pilot.html')
-	pilots = Pilot.objects.all()
+	pilot_list = []
+	
+	for pilot in Pilot.objects.all():
+		pilot_list.append(pilot)
+
+	user= User.objects.get(username=request.user.username)
+	group = checkEspecialUserGroup(user)
+
 	if format=='json':
-		data = serializers.serialize('json', pilots)
+
+		serializer_list = createSerializerList(pilot_list,user,group)
+		data = serializers.serialize('json',serializer_list)
 		return HttpResponse(data, mimetype='application/json')
 
 	elif format=='xml':
-		data = serializers.serialize('xml', pilots)
+		
+		serializer_list = createSerializerList(pilot_list,user,group)
+		data = serializers.serialize('xml',serializer_list)
+
 		return HttpResponse(data, mimetype='application/xml')
 	else:
 		variables = Context({
-			'pilots': pilots
+			'pilots': pilot_list,
+			'user': user,
+			'group':group
+
+			
 		})
 		template_render= template.render(variables)
 		return HttpResponse(template_render)
@@ -266,192 +295,6 @@ def categoryinfo(request,form,category_id):
 		output = template.render(variables)
 		return HttpResponse(output)
 
-#TRATAMIENTO DE USUARIOS
-
-#creamos subclase de UserCreationForm para que nos cree el formulario 
-#para el registro
-class UserCreateForm(UserCreationForm):
-	username = forms.CharField(label="Introduce usuario")
-	first_name = forms.CharField(label="Introduce tu nombre")
-	last_name = forms.CharField(label="Introduce tus apellidos")
-	email = forms.EmailField(label="Introduce un email")
-	password1 = forms.CharField(label="Password",widget=forms.PasswordInput)
-	password2 = forms.CharField(label="Repite password", widget=forms.PasswordInput)
-
-
-	class Meta(UserCreationForm.Meta):
-		model = User
-		fields = ("username","first_name","last_name","email","password1","password2",)
-
-	def save(self, commit=True):
-		user = super(UserCreationForm, self).save(commit=False)
-		user.email=self.cleaned_data["email"]
-		user.set_password(self.cleaned_data["password1"])
-		user.username = self.cleaned_data["username"]
-		user.last_name = self.cleaned_data["last_name"]
-		user.first_name = self.cleaned_data["first_name"]
-		if commit:
-			user.save()
-			return user
-
-
-#crear un nuevo usuario
-@login_required(login_url='/login/')
-def newuser(request):
-	if request.method=='POST':
-		form = UserCreateForm(request.POST)
-		if form.is_valid():
-			user = form.save()
-			if request.user.is_superuser:
-				addUserPermissions(user)
-			return HttpResponseRedirect('/index/')
-	else:
-		form = UserCreateForm()
-	return render_to_response('registration/newuser.html',
-		   {'form':form},context_instance=RequestContext(request))
-
-#obtener el perfil de usuario
-def addUserPermissions(specialUser):
-	group = Group.objects.get(name='special_user')
-	specialUser.groups.add(group)
-
-@login_required(login_url='/login/')
-def profileinfo(request):
-
-	template = get_template('userProfile/userprofile.html')
-	user=User.objects.get(username__exact=request.user.username)
-	user_name = user.username
-	user_mail = user.email
-	user_first_name = user.first_name
-	user_last_name = user.last_name
-	variables = Context({
-			'user_name':user_name,
-			'user_email':user_mail,
-			'user_first_name':user_first_name,
-			'user_last_name':user_last_name,
-		})
-	output = template.render(variables)
-	return HttpResponse(output)
-
-class ChangePassword(forms.Form):
-	password1 = forms.CharField(label="Password",widget=forms.PasswordInput)
-	password2 = forms.CharField(label="Repite password",widget=forms.PasswordInput)
-	class Meta():
-		model = User
-		fields=('password1','password2')
-
-@login_required(login_url='/login/')
-def changepassword(request):
-
-	if request.method == 'GET':
-		form = ChangePassword()
-	else:
-		form = ChangePassword(request.POST)
-		if form.is_valid():			
-			user = User.objects.get(username=request.user.username)
-			password = form.cleaned_data['password1']
-			user.set_password(password)
-			user.save(update_fields=['password'])
-			return HttpResponseRedirect("/user_profile/")
-	return render_to_response('userProfile/change_password.html',{'form':form},context_instance=RequestContext(request))
-
-
-class ChangeUsername(forms.Form):
-
-	username = forms.CharField(label="Nuevo usuario")
-
-	class Meta():
-		model = User
-		fields = ('username')
-
-
-@login_required(login_url='/login/')
-def changeusername(request):
-
-	if request.method == 'GET':
-		form = ChangeUsername()
-	else:
-		form = ChangeUsername(request.POST)
-		if form.is_valid():			
-			user = User.objects.get(username=request.user.username)
-			user.username = form.cleaned_data['username']
-			user.save(update_fields=['username'])
-			return HttpResponseRedirect("/user_profile/")
-	return render_to_response('userProfile/change_username.html',{'form':form},context_instance=RequestContext(request))
-
-
-class ChangeFirstName(forms.Form):
-
-	firstname = forms.CharField(label="Cambiar nombre")
-
-	class Meta():
-		model = User
-		fields  = ("firstname")
-
-@login_required(login_url='/login/')
-def changefirstname(request):
-
-	if request.method == 'GET':
-		form = ChangeFirstName()
-	else:
-		form = ChangeFirstName(request.POST)
-		if form.is_valid():			
-			user = User.objects.get(username=request.user.username)
-			user.first_name = form.cleaned_data['firstname']
-			user.save(update_fields=['first_name'])
-			return HttpResponseRedirect("/user_profile/")
-	return render_to_response('userProfile/change_firstname.html',{'form':form},context_instance=RequestContext(request))
-
-class ChangeSecondName(forms.Form):
-
-	secondname = forms.CharField(label="Cambiar Apellidos")
-
-	class Meta():
-
-		model = User
-		fields  = ("secondname")
-
-@login_required(login_url='/login/')
-def changesecondname(request):
-
-	if request.method == 'GET':
-		form = ChangeSecondName()
-	else:
-		form = ChangeSecondName(request.POST)
-		if form.is_valid():			
-			user = User.objects.get(username=request.user.username)
-			user.last_name = form.cleaned_data['secondname']
-			user.save(update_fields=['last_name'])
-			return HttpResponseRedirect("/user_profile/")
-	return render_to_response('userProfile/change_secondname.html',{'form':form},context_instance=RequestContext(request))
-
-class ChangeEmail(forms.Form):
-
-	email = forms.CharField(label="Cambiar email")
-
-	class Meta():
-
-		model = User
-		fields = ("email")
-
-@login_required(login_url='/login/')
-def changeemail(request):
-
-	if request.method == 'GET':
-		form = ChangeEmail()
-	else:
-		form = ChangeEmail(request.POST)
-		if form.is_valid():			
-			user = User.objects.get(username=request.user.username)
-			user.email = form.cleaned_data['email']
-			user.save(update_fields=['email'])
-			return HttpResponseRedirect("/user_profile/")
-	return render_to_response('userProfile/change_email.html',
-							{'form':form},context_instance=RequestContext(request))
-class PilotForm(ModelForm):
-
-	class Meta:
-		model = Pilot
 
 class CreatePilot(CreateView):
 
@@ -463,4 +306,17 @@ class CreatePilot(CreateView):
 	def form_valid(self, form):
 		return super(CreatePilot, self).form_valid(form)
 
+class UpdatePilot(UpdateView):
 
+	model = Pilot
+	template_name = 'management/modifyPilot.html'
+	form_class = PilotForm
+	success_url="/pilot"
+
+	def get_initial(self):
+		pk=self.kwargs['pk']
+		pilot = Pilot.objects.get(pk=pk)
+		initial={'pilot_name':pilot.pilot_name,
+			   'pilot_age':pilot.pilot_age,'race_win':pilot.race_win,'manufacturer':pilot.manufacturer,
+			    'country':pilot.country}
+		return initial
