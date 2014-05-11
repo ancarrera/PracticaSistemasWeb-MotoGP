@@ -1,5 +1,4 @@
 //<!--
-
 $(document).ready(function() {
    
     $("#confirm").click(function(){
@@ -12,5 +11,4 @@ $(document).ready(function() {
     	return false;
 							});
 });
-
 //-->

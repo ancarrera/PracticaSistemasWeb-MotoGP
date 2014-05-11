@@ -72,8 +72,10 @@ class ChangeUsername(forms.Form):
 		model = User
 		fields = ('username')
 
-class PilotForm(ModelForm):
+class PilotForm(forms.ModelForm):
 
 	class Meta:
 		model = Pilot
+
+	
 

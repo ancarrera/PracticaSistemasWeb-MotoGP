@@ -3,7 +3,10 @@ from django.http import HttpResponse, Http404,HttpResponseRedirect
 from django.shortcuts import render_to_response,render
 from django.template.loader import get_template
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+from django.template import Context, RequestContext
 
+from forms import *
 #crear un nuevo usuario
 @login_required(login_url='/login/')
 def newuser(request):

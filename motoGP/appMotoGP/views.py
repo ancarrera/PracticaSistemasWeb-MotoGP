@@ -1,5 +1,5 @@
 # Create your views here.
-from django.template import Context, RequestContext
+
 from django.core import serializers
 from django.views.generic import *
 from django.contrib.auth.forms import AuthenticationForm
@@ -9,7 +9,7 @@ from django.contrib.auth.views import logout
 from django.views.generic.edit import CreateView,UpdateView
 from rest_framework import generics, permissions
 from itertools import chain
-from forms import *
+
 from userviews import *
 
 

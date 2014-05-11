@@ -1,31 +1,37 @@
 {% extends "base.html" %}
+{% load staticfiles %}
 
 		{% block title %}Web MotoGP{% endblock %}
 
-		{% block header %}
-		<h1>Web MotoGP</h1>
+		{% block staticos %}
+		<link rel="stylesheet" type="text/css" href="{% static "css/index.css" %}"/>
 		{% endblock %}
 
+		{% block header %}
+		<h1>Web MotoGP - Página principal</h1>
+		<p id="userid">Usuario identificado como <strong id="userid">{{login_user}}</strong></p>
+		{% endblock %} 
+
 		{% block content %}
-		<p>Identificado como <strong>{{login_user}}</strong></p>
+		 <p><strong>Contenido:</strong></p>
 		<ul>
 			<li>
-				<a href="/pilot/">Pilotos</a>
+				<a href="/pilot/"><strong>Pilotos</strong></a>
 				<br></br>
 			</li>
 
 			<li>
-				<a href="/manufacturer/">Fabricantes</a>
+				<a href="/manufacturer/"><strong>Fabricantes</strong></a>
 				<br></br>
 			</li>
 
 			<li>
-				<a href="/category/">Categorias</a>
+				<a href="/category/"><strong>Categorias</strong></a>
 				<br></br>
 			</li>
 
 			<li>
-				<a href="/country/">Paises</a>
+				<a href="/country/"><strong>Paises</strong></a>
 				<br></br>
 			</li>
 		</ul>

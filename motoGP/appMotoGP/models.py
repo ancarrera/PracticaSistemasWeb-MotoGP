@@ -20,6 +20,8 @@ class Pilot(models.Model):
 	pilot_name = models.CharField(max_length=40)
 	pilot_age = models.IntegerField()
 	race_win = models.IntegerField()
+	representative_company = models.CharField(max_length=60, null=True)
+	debut_circuit = models.CharField(max_length=60, null=True)
 	manufacturer = models.ForeignKey(Manufacturer)
 	country = models.ForeignKey(Country)
 	def __unicode__(self):

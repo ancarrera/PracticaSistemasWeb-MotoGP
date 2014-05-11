@@ -10,11 +10,14 @@
 		<form action='' method='post'>
 		{% csrf_token %}
 		<table>
-			<tr>
-				<td>{{form}}</td>
-			</tr>
-		<tr><td><input type='submit' value='Submit' /></td></tr>
+			
+				{{form.as_table}}
 		</table>
+			<input type='submit' value='Submit' />
+			<br />
+		
 		</form>
-		<input type="button" value="Volver a inicio" onClick=location.href="/index/" />
+		<br />
+		<br />
+		<p><input type="button" value="Volver al perfil" onClick=location.href="/user_profile/" /> | <input type="button" value="Volver a inicio" onClick=location.href="/index/" /></p>
 	    {% endblock %}

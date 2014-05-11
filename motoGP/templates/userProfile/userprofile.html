@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load staticfiles %}
 
 		{% block title %}Perfil de usuario{% endblock %}
 
@@ -6,11 +7,15 @@
 		<h1>Perfil de usuario</h1>
 		{% endblock %}
 
+		{% block staticos %}
+		<link rel="stylesheet" type="text/css" href="{% static "css/userprofile.css" %}"/>
+		{% endblock %}
+
 		{% block content %}
-		<p> <strong>Usuario: </strong> {{user_name }}    <a href="/change_username/"> Cambiar usuario</a></p>
-		<p> <strong>Nombre: </strong>{{user_first_name}}   <a href="/change_firstname/"> Cambiar nombre</a></p>
-		<p> <strong>Apellidos: </strong>{{user_last_name}} <a href="/change_secondname/"> Cambiar apellidos</a> </p>
-		<p> <strong>Email: </strong>{{user_email}} <a href="/change_email/"> Cambiar email</a> </p>	
-		<p> <a href="/change_password/"> Cambiar contraseña</a> </p>
+		<p> <strong>Usuario: </strong> {{user_name }}    <a id="link" href="/change_username/"> <strong>Cambiar usuario</strong></a></p>
+		<p> <strong>Nombre: </strong>{{user_first_name}}   <a id="link" href="/change_firstname/"> <strong>Cambiar nombre</strong></a></p>
+		<p> <strong>Apellidos: </strong>{{user_last_name}} <a id="link" href="/change_secondname/"> <strong>Cambiar apellidos</strong></a> </p>
+		<p> <strong>Email: </strong>{{user_email}} <a id="link" href="/change_email/"> <strong> Cambiar email </strong></a> </p>	
+		<p> <a href="/change_password/"> <strong>Cambiar contraseña</strong></a> </p>
 		<input type="button" value="Volver a inicio" onClick=location.href="/index/" />
 	    {% endblock %}

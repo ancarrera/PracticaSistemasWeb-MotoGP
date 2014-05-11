@@ -3,8 +3,57 @@
 {% block title %} Crear piloto {% endblock %}
 
 {%block header %}
-<script type="text/javascript" src="{% static "javascript/alertform.js" %}">
-	
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+ <script>
+
+ $(function() {
+            $.getJSON("{% static "json/circuits.json" %}", {}, function (circuits) {
+                $("#id_debut_circuit").autocomplete({
+                    source: circuits,
+                     minLength: 2,
+
+                });
+            });
+        });
+
+$(document).ready( function(){ 
+$("#id_representative_company").autocomplete({
+                source: function( request, response ) {
+                    $.ajax({
+                        type: 'GET',
+                        url: "http://api.climatecounts.org/1/Companies.json?Search="+request.term+"&IncludeBrands=True",
+                        dataType: "jsonp",
+
+                        data: {
+                            format:'json'
+                        },
+                        minLength: 2,
+                        success: function( data ) {
+                                   
+                            response( $.map( data.Companies, function( item ) {
+                               
+                                return {
+                                    label: item.Name, 
+                                    value: item.Name,
+                                }
+                            }));
+                        }
+                    });
+                },
+               
+                select: function( event, ui ) {
+                    if (ui.item) {
+                        $("#id_representative_company").val(ui.item.Name);
+                    }
+                }
+            });
+    });
+
+    </script>
+
 </script>
 <h1> Crear un nuevo piloto</h1> 
 {% endblock %}
@@ -25,6 +74,5 @@
 	
 	<br />
 	<br />
-
 		<input type="button" value="Volver a inicio" onClick=location.href="/index/" />
 {% endblock %}
