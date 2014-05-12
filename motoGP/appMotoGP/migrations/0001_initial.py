@@ -30,10 +30,12 @@ class Migration(SchemaMigration):
             ('pilot_name', self.gf('django.db.models.fields.CharField')(max_length=40)),
             ('pilot_age', self.gf('django.db.models.fields.IntegerField')()),
             ('race_win', self.gf('django.db.models.fields.IntegerField')()),
-            ('origin_city', self.gf('django.db.models.fields.CharField')(default='No value', max_length=40)),
-            ('company_representative', self.gf('django.db.models.fields.CharField')(default='No value', max_length=40)),
+            ('representative_company', self.gf('django.db.models.fields.CharField')(max_length=60, null=True)),
+            ('debut_circuit', self.gf('django.db.models.fields.CharField')(max_length=60, null=True)),
+            ('image', self.gf('django.db.models.fields.files.ImageField')(max_length=100, null=True)),
             ('manufacturer', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['appMotoGP.Manufacturer'])),
             ('country', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['appMotoGP.Country'])),
+            ('race_winwww', self.gf('django.db.models.fields.IntegerField')(default='sfgs')),
         ))
         db.send_create_signal(u'appMotoGP', ['Pilot'])
 
@@ -94,14 +96,16 @@ class Migration(SchemaMigration):
         },
         u'appMotoGP.pilot': {
             'Meta': {'object_name': 'Pilot'},
-            'company_representative': ('django.db.models.fields.CharField', [], {'default': "'No value'", 'max_length': '40'}),
             'country': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['appMotoGP.Country']"}),
+            'debut_circuit': ('django.db.models.fields.CharField', [], {'max_length': '60', 'null': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'image': ('django.db.models.fields.files.ImageField', [], {'max_length': '100', 'null': 'True'}),
             'manufacturer': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['appMotoGP.Manufacturer']"}),
-            'origin_city': ('django.db.models.fields.CharField', [], {'default': "'No value'", 'max_length': '40'}),
             'pilot_age': ('django.db.models.fields.IntegerField', [], {}),
             'pilot_name': ('django.db.models.fields.CharField', [], {'max_length': '40'}),
-            'race_win': ('django.db.models.fields.IntegerField', [], {})
+            'race_win': ('django.db.models.fields.IntegerField', [], {}),
+            'race_winwww': ('django.db.models.fields.IntegerField', [], {'default': "'sfgs'"}),
+            'representative_company': ('django.db.models.fields.CharField', [], {'max_length': '60', 'null': 'True'})
         }
     }
 

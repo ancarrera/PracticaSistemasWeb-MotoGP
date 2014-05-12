@@ -4,6 +4,9 @@ from django.views.generic import *
 from django.contrib.auth.views import logout
 from appMotoGP.views import *
 from appMotoGP.form import *
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from django.conf.urls.static import static
+from motoGP import settings
 
 
 admin.autodiscover()
@@ -51,4 +54,6 @@ urlpatterns = patterns('',
     url(r'^specialUser/',newuser),
     url(r'^create/new_pilot/$', CreatePilot.as_view(), name='pilot_create'),
 
-)
+) 
+urlpatterns += staticfiles_urlpatterns()
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

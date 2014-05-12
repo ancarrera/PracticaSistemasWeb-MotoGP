@@ -62,7 +62,7 @@ $("#id_representative_company").autocomplete({
 
 {% block content %}
 
-<form method="post" onsubmit="return validateForm()">
+<form method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
 		{% csrf_token %}
 		<table>
 			{{form.as_table }}

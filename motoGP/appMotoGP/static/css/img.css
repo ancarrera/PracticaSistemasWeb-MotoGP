@@ -1,0 +1,19 @@
+	img {
+		border: none;
+
+	}
+
+	.imagen {
+		padding: 2em 7em 3em 3em;
+
+	}
+	.imagen img {
+		background: #fff;
+		border: solid 1px #ccc;
+		padding: 5px;
+
+	}
+	#buttons{
+
+		margin: 2em 0em 0em 0em;
+	}

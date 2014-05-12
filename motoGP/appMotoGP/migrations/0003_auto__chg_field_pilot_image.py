@@ -8,30 +8,14 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        # Deleting field 'Pilot.origin_city'
-        db.delete_column(u'appMotoGP_pilot', 'origin_city')
 
-        # Adding field 'Pilot.representative_company'
-        db.add_column(u'appMotoGP_pilot', 'representative_company',
-                      self.gf('django.db.models.fields.CharField')(max_length=60, null=True),
-                      keep_default=False)
-
-
-        # Changing field 'Pilot.debut_circuit'
-        db.alter_column(u'appMotoGP_pilot', 'debut_circuit', self.gf('django.db.models.fields.CharField')(max_length=60, null=True))
+        # Changing field 'Pilot.image'
+        db.alter_column(u'appMotoGP_pilot', 'image', self.gf('django.db.models.fields.files.ImageField')(max_length=100))
 
     def backwards(self, orm):
-        # Adding field 'Pilot.origin_city'
-        db.add_column(u'appMotoGP_pilot', 'origin_city',
-                      self.gf('django.db.models.fields.CharField')(default='No value', max_length=60),
-                      keep_default=False)
 
-        # Deleting field 'Pilot.representative_company'
-        db.delete_column(u'appMotoGP_pilot', 'representative_company')
-
-
-        # Changing field 'Pilot.debut_circuit'
-        db.alter_column(u'appMotoGP_pilot', 'debut_circuit', self.gf('django.db.models.fields.CharField')(max_length=60))
+        # Changing field 'Pilot.image'
+        db.alter_column(u'appMotoGP_pilot', 'image', self.gf('django.db.models.fields.files.ImageField')(max_length=100, null=True))
 
     models = {
         u'appMotoGP.category': {
@@ -58,6 +42,7 @@ class Migration(SchemaMigration):
             'country': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['appMotoGP.Country']"}),
             'debut_circuit': ('django.db.models.fields.CharField', [], {'max_length': '60', 'null': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'image': ('django.db.models.fields.files.ImageField', [], {'default': "'img/no-image.jpg'", 'max_length': '100'}),
             'manufacturer': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['appMotoGP.Manufacturer']"}),
             'pilot_age': ('django.db.models.fields.IntegerField', [], {}),
             'pilot_name': ('django.db.models.fields.CharField', [], {'max_length': '40'}),

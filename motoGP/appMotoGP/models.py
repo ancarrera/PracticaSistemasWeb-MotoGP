@@ -22,6 +22,7 @@ class Pilot(models.Model):
 	race_win = models.IntegerField()
 	representative_company = models.CharField(max_length=60, null=True)
 	debut_circuit = models.CharField(max_length=60, null=True)
+	image = models.ImageField(upload_to='img', null=True, blank=True, default='img/no-image.png')
 	manufacturer = models.ForeignKey(Manufacturer)
 	country = models.ForeignKey(Country)
 	def __unicode__(self):

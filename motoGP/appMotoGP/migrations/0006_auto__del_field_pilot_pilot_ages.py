@@ -8,22 +8,14 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        # Deleting field 'Pilot.origin_city'
-        db.delete_column(u'appMotoGP_pilot', 'origin_city')
-
-        # Deleting field 'Pilot.company_representative'
-        db.delete_column(u'appMotoGP_pilot', 'company_representative')
+        # Deleting field 'Pilot.pilot_ages'
+        db.delete_column(u'appMotoGP_pilot', 'pilot_ages')
 
 
     def backwards(self, orm):
-        # Adding field 'Pilot.origin_city'
-        db.add_column(u'appMotoGP_pilot', 'origin_city',
-                      self.gf('django.db.models.fields.CharField')(default='No value', max_length=40),
-                      keep_default=False)
-
-        # Adding field 'Pilot.company_representative'
-        db.add_column(u'appMotoGP_pilot', 'company_representative',
-                      self.gf('django.db.models.fields.CharField')(default='No value', max_length=40),
+        # Adding field 'Pilot.pilot_ages'
+        db.add_column(u'appMotoGP_pilot', 'pilot_ages',
+                      self.gf('django.db.models.fields.IntegerField')(default='13'),
                       keep_default=False)
 
 
@@ -50,11 +42,14 @@ class Migration(SchemaMigration):
         u'appMotoGP.pilot': {
             'Meta': {'object_name': 'Pilot'},
             'country': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['appMotoGP.Country']"}),
+            'debut_circuit': ('django.db.models.fields.CharField', [], {'max_length': '60', 'null': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'image': ('django.db.models.fields.files.ImageField', [], {'default': "'img/no-image.png'", 'max_length': '100', 'null': 'True', 'blank': 'True'}),
             'manufacturer': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['appMotoGP.Manufacturer']"}),
             'pilot_age': ('django.db.models.fields.IntegerField', [], {}),
             'pilot_name': ('django.db.models.fields.CharField', [], {'max_length': '40'}),
-            'race_win': ('django.db.models.fields.IntegerField', [], {})
+            'race_win': ('django.db.models.fields.IntegerField', [], {}),
+            'representative_company': ('django.db.models.fields.CharField', [], {'max_length': '60', 'null': 'True'})
         }
     }
 
