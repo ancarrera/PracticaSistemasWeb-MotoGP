@@ -1,11 +1,14 @@
 {% extends "base.html" %}
-{% load staticfiles %}		
-{% block title %} Crear piloto {% endblock %}
+{% load staticfiles %}
+		
+{% block title %}MotoGP -- Moficar piloto {% endblock %}
+
+{% block static %}
+<script type="text/javascript" src="{% static "javascript/alertform.js" %}"></script>
+<script type="text/javascript" src="{% static "javascript/autocomplete.js" %}"></script>
+{% endblock %}
 
 {%block header %}
-<script type="text/javascript" src="{% static "javascript/alertform.js" %}">
-	
-</script>
 <h1> Modificar un piloto</h1> 
 {% endblock %}
 

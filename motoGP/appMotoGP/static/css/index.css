@@ -1,6 +1,19 @@
+#container {
+    line-height: auto;
+}
+#container img{
+		width: 160px;
+		height: 100px;
+		margin:0em 0em 1em 0em;
+		vertical-align: center;
+}
+
+#title_head{
+
+	text-align:center;
+}
 #userid{
-	
-	text-align: center;
+	text-align:center;
 	font-size:25px;
 	font-family:Helvetica,Georgia,"Times New Roman",Times,serif;
 	color:#FF0000;

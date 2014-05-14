@@ -3,8 +3,11 @@
 	<head>
 		<meta charset='utf-8'/>
 		<title>{% block title %}{% endblock %}</title>
-		{% block staticos %}{% endblock %}
 		<link rel="stylesheet" type="text/css" href="{% static "css/baseweb.css" %}"/>
+		<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+		<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+		{% block static %}{% endblock %}
 
 	</head>
 
@@ -15,6 +18,9 @@
 		<div id="content">
 		{% block content %}{% endblock %}
 		</div>
+		
+			<p id="fotter">Created by Adrian Carrera and Albert Berga</p>
+		
 	</body>
 	
 </html>

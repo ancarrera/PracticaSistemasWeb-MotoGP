@@ -3,13 +3,15 @@
 
 		{% block title %}Web MotoGP{% endblock %}
 
-		{% block staticos %}
+		{% block static %}
 		<link rel="stylesheet" type="text/css" href="{% static "css/index.css" %}"/>
 		{% endblock %}
 
 		{% block header %}
-		<h1>Web MotoGP - Página principal</h1>
-		<p id="userid">Usuario identificado como <strong id="userid">{{login_user}}</strong></p>
+
+		<h1 id="title_head"> <div id="container"><img id="logo" src="{% static "static_img/logo.jpg"%}"/></div>Web MotoGP - Página principal</h1>
+		<p id="userid">Usuario identificado como <strong id="userid">
+			{{login_user}}</strong></p>
 		{% endblock %} 
 
 		{% block content %}
