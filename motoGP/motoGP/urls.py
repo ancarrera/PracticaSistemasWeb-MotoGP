@@ -12,6 +12,7 @@ from motoGP import settings
 admin.autodiscover()
 
 urlpatterns = patterns('',
+
     #API urls
     url(r'^api/country/$', login_required(APICountryList.as_view()), name='country-list'),
     url(r'^api/country/(?P<pk>\d+)/$', login_required(APICountryDetail.as_view()), name='country-detail'),
@@ -21,14 +22,9 @@ urlpatterns = patterns('',
     url(r'^api/manufacturer/(?P<pk>\d+)/$', login_required(APIManufacturerDetail.as_view()), name='manufacturer-detail'),
     url(r'^api/pilot/$', login_required(APIPilotList.as_view()), name='pilot-list'),
     url(r'^api/pilot/(?P<pk>\d+)/$', login_required(APIPilotDetail.as_view()), name='pilot-detail'),
-    # Examples:
-    # url(r'^$', 'motoGP.views.home', name='home'),
-    # url(r'^motoGP/', include('motoGP.foo.urls')),
-    #url(r'^pilot/(?P<pk>\d+)/$',),
-    # Uncomment the admin/doc line below to enable admin documentation:
-    # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
-    # Uncomment the next line to enable the admin:
+
+    #Web url
     url(r'^$', welcomeindex),
     url(r'^/$', welcomeindex),
     url(r'^accounts/login/','django.contrib.auth.views.login'),
@@ -64,9 +60,6 @@ urlpatterns = patterns('',
     url(r'^create/new_pilot/$', CreatePilot.as_view(), name='pilot_create'),
 
 ) 
-
-
-
-
+#static url
 urlpatterns += staticfiles_urlpatterns()
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

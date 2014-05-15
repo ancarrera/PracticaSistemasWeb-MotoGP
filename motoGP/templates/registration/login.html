@@ -23,8 +23,8 @@
 		<p><label for="id_password">Contraseña:</label> 
 		 {{ form.password }}</p> 
 
-		<input type="hidden" name="next" value="/index" />
-		<input type="submit" value="login">
+		<input  type="hidden" name="next" value="/index" />
+		<input  type="submit" value="login">
 		{% csrf_token %}
 		<p class="perder"> <a href="/user/">Registrarme</a> </p>
 
