@@ -9,6 +9,7 @@ from django.contrib.auth.views import logout
 from django.views.generic.edit import CreateView,UpdateView
 from rest_framework import generics, permissions
 from itertools import chain
+from serializers import *
 
 from userviews import *
 
@@ -219,7 +220,7 @@ def countryinfohtml(request,country_id):
 	return countryinfo(request,None,country_id)
 
 @login_required(login_url='/login/')
-def countryinfo(request,form,country_id):
+def countryinfo(request,format,country_id):
 
 	template = get_template('countryinfo.html')
 	try:
@@ -320,3 +321,38 @@ class UpdatePilot(UpdateView):
 			   'pilot_age':pilot.pilot_age,'race_win':pilot.race_win,'manufacturer':pilot.manufacturer,
 			    'country':pilot.country}
 		return initial
+
+#API RESTful
+
+
+class APICountryList(generics.ListCreateAPIView):
+    model = Country
+    serializer_class = CountrySerializer
+
+class APICountryDetail(generics.RetrieveUpdateDestroyAPIView):
+    model = Country
+    serializer_class = CountrySerializer
+
+class APIPilotList(generics.ListCreateAPIView):
+    model = Pilot
+    serializer_class = PilotSerializer
+
+class APIPilotDetail(generics.RetrieveUpdateDestroyAPIView):
+    model = Pilot
+    serializer_class = PilotSerializer
+
+class APICategoryList(generics.ListCreateAPIView):
+    model = Category
+    serializer_class = CategorySerializer
+
+class APICategoryDetail(generics.RetrieveUpdateDestroyAPIView):
+    model = Category
+    serializer_class = CategorySerializer
+
+class APIManufacturerList(generics.ListCreateAPIView):
+    model = Manufacturer
+    serializer_class = ManufacturerSerializer
+
+class APIManufacturerDetail(generics.RetrieveUpdateDestroyAPIView):
+    model = Manufacturer
+    serializer_class = ManufacturerSerializer
