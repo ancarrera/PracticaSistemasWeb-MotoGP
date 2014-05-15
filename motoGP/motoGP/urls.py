@@ -59,7 +59,7 @@ urlpatterns = patterns('',
     url(r'^change_firstname/', changefirstname),
     url(r'^change_secondname/', changesecondname),
     url(r'^change_email/', changeemail),
-    url(r'^/accountslogout/', 'django.contrib.auth.views.logout', {'next_page': '/'}),
+    url(r'^accounts/logout/', 'django.contrib.auth.views.logout', {'next_page': '/'}),
     url(r'^specialUser/',newuser),
     url(r'^create/new_pilot/$', CreatePilot.as_view(), name='pilot_create'),
 
