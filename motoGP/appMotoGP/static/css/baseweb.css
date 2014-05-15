@@ -11,7 +11,7 @@
 		margin:0 auto;
 		margin-top:50px;
 	  	margin-bottom:30px;
-	  	animation: animacionColor 500s infinite;
+	  	animation: animacionColor 120s infinite;
 	}
 
 	@keyframes animacionColor{

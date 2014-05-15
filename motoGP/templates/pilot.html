@@ -16,14 +16,14 @@
 
 			{% if user.is_superuser %}
 		
-				<p><input type="button" value="Modificar" onClick=location.href="/pilot/{{pilot.id}}/modify/" /> |
-				<input type="button" value="Eliminar" onClick=location.href="/pilot/{{pilot.id}}/delete/" /></p>
+				<p><input class="button-link" type="button" value="Modificar" onClick=location.href="/pilot/{{pilot.id}}/modify/" /> |
+				<input  class="button-link" type="button" value="Eliminar" onClick=location.href="/pilot/{{pilot.id}}/delete/" /></p>
 
 			{% else %}
 				{% if group %}
 
-				<p><input type="button" value="Modificar" onClick=location.href="/pilot/{{pilot.id}}/modify/" /> |
-				<input type="button" value="Eliminar" onClick=location.href="/pilot/{{pilot.id}}/delete/" /></p>
+				<p><input class="button-link" type="button" value="Modificar" onClick=location.href="/pilot/{{pilot.id}}/modify/" /> |
+				<input class="button-link" type="button" value="Eliminar" onClick=location.href="/pilot/{{pilot.id}}/delete/" /></p>
 				{% endif %}
 
 			{% endif %}
@@ -36,5 +36,5 @@
 		{% endif %}
 		<br />
 		<br />
-		<p><input type="button" value="Volver a inicio" onClick=location.href="/index/" /></p>
+		<p><input class="button-link" type="button" value="Volver a inicio" onClick=location.href="/index/" /></p>
 	{% endblock %}
