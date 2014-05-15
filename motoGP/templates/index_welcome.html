@@ -8,7 +8,7 @@
  	{% block content %}
 	{% if user != 'anonimo' %} 
 	<p>¡Bienvenido <strong>{{ user }}</strong> !, a la web sobre información de motoGP</p> 
-	<input type="button" value="Ir al contenido" onClick=location.href="/index/" />
+	<input class="button-link" type="button" value="Ir al contenido" onClick=location.href="/index/" />
 	{% else %} 
 	<p>Bienvenido <strong>{{ user }}</strong>: Es obligario <a href="/login/">sign in</a> para acceder.</p> 
 	{% endif %}
