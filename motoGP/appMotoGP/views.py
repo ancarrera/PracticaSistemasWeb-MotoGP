@@ -8,9 +8,8 @@ from django.contrib.auth.models import Group
 from django.contrib.auth.views import logout
 from django.views.generic.edit import CreateView,UpdateView
 from rest_framework import generics, permissions
-from itertools import chain
-from serializers import *
 
+from serializers import *
 from userviews import *
 
 
@@ -35,7 +34,7 @@ def getUser(request):
 def login(request):
 	return render_to_response('registration/login.html')
 
-@login_required(login_url='/login/')
+@login_required(login_url='/accounts/login/')
 def indexhtml(request):
 
 	template = get_template('index.html')
@@ -70,12 +69,12 @@ def createSerializerList(pilot_list, user, group):
 	return serializer_list
 
 
-@login_required(login_url='/login/')
+@login_required(login_url='/accounts/login/')
 def pilotpagehtml(request):
 
 	return pilotpage(request, None)
 
-@login_required(login_url='/login/')
+@login_required(login_url='/accounts/login/')
 def pilotpage(request,format):
 
 	template = get_template('pilot.html')
@@ -110,12 +109,12 @@ def pilotpage(request,format):
 		template_render= template.render(variables)
 		return HttpResponse(template_render)
 
-@login_required(login_url='/login/')
+@login_required(login_url='/accounts/login/')
 def pilotinfohtml(request,pilot_id):
 
 	return pilotinfo(request,None,pilot_id)
 
-@login_required(login_url='/login/')
+@login_required(login_url='/accounts/login/')
 def pilotinfo(request,format,pilot_id):
 
 	template = get_template('pilotinfo.html')
@@ -138,12 +137,12 @@ def pilotinfo(request,format,pilot_id):
 		output = template.render(variables)
 		return HttpResponse(output)
 
-@login_required(login_url='/login/')
+@login_required(login_url='/accounts/login/')
 def manufacturerpagehtml(request):
 
 	return manufacturerpage(request, None)
 
-@login_required(login_url='/login/')
+@login_required(login_url='/accounts/login/')
 def manufacturerpage(request,format):
 
 	template = get_template('manufacturer.html')
@@ -162,12 +161,12 @@ def manufacturerpage(request,format):
 		template_render = template.render(variables)
 		return HttpResponse(template_render)
 
-@login_required(login_url='/login/')
+@login_required(login_url='/accounts/login/')
 def manufacturerinfohtml(request,manufacturer_id):
 
 	return manufacturerinfo(request,None,manufacturer_id)
 
-@login_required(login_url='/login/')
+@login_required(login_url='/accounts/login/')
 def manufacturerinfo(request,format,manufacturer_id):
 
 	template = get_template('manufacturerinfo.html')
@@ -190,12 +189,12 @@ def manufacturerinfo(request,format,manufacturer_id):
 		output = template.render(variables)
 		return HttpResponse(output)
 
-@login_required(login_url='/login/')
+@login_required(login_url='/accounts/login/')
 def countrypagehtml(request):
 
 	return countrypage(request, None)
 
-@login_required(login_url='/login/')
+@login_required(login_url='/accounts/login/')
 def countrypage(request,format):
 
 	template = get_template('country.html')
@@ -214,12 +213,12 @@ def countrypage(request,format):
 		template_render = template.render(variables)
 		return HttpResponse(template_render)
 
-@login_required(login_url='/login/')
+@login_required(login_url='/accounts/login/')
 def countryinfohtml(request,country_id):
 
 	return countryinfo(request,None,country_id)
 
-@login_required(login_url='/login/')
+@login_required(login_url='/accounts/login/')
 def countryinfo(request,format,country_id):
 
 	template = get_template('countryinfo.html')
@@ -247,7 +246,7 @@ def categorypagehtml(request):
 
 	return categorypage(request, None)
 
-@login_required(login_url='/login/')
+@login_required(login_url='/accounts/login/')
 def categorypage(request,format):
 
 	template = get_template('category.html')
@@ -267,12 +266,12 @@ def categorypage(request,format):
 		template_render = template.render(variables)
 		return HttpResponse(template_render)
 
-@login_required(login_url='/login/')
+@login_required(login_url='/accounts/login/')
 def categoryinfohtml(request,category_id):
 
 	return categoryinfo(request,None,category_id)
 
-@login_required(login_url='/login/')
+@login_required(login_url='/accounts/login/')
 def categoryinfo(request,form,category_id):
 
 	template = get_template('categoryinfo.html')

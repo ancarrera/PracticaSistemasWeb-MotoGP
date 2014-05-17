@@ -3,7 +3,7 @@
             $.getJSON("/static/json/circuits.json", {}, function (circuits) {
                 $("#id_debut_circuit").autocomplete({
                     source: circuits,
-                     minLength: 2,
+                     minLength: 1,
 
                 });
             });
@@ -18,7 +18,7 @@ $("#id_representative_company").autocomplete({
                         dataType: "jsonp",
 
                         data: {
-                            format:'json'
+                            format:'json',
                         },
                         minLength: 2,
                         success: function( data ) {
@@ -30,10 +30,10 @@ $("#id_representative_company").autocomplete({
                                     value: item.Name,
                                 }
                             }));
-                        }
+                        } 
                     });
                 },
-               
+                
                 select: function( event, ui ) {
                     if (ui.item) {
                         $("#id_representative_company").val(ui.item.Name);

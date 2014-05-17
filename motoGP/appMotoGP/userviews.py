@@ -8,7 +8,7 @@ from django.template import Context, RequestContext
 
 from forms import *
 #crear un nuevo usuario
-@login_required(login_url='/login/')
+@login_required(login_url='/accounts/login/')
 def newuser(request):
 	if request.method=='POST':
 		form = UserCreateForm(request.POST)
@@ -27,7 +27,7 @@ def addUserPermissions(specialUser):
 	group = Group.objects.get(name='special_user')
 	specialUser.groups.add(group)
 
-@login_required(login_url='/login/')
+@login_required(login_url='/accounts/login/')
 def profileinfo(request):
 
 	template = get_template('userProfile/userprofile.html')
@@ -47,7 +47,7 @@ def profileinfo(request):
 
 
 
-@login_required(login_url='/login/')
+@login_required(login_url='/accounts/login/')
 def changepassword(request):
 
 	if request.method == 'GET':
@@ -63,7 +63,7 @@ def changepassword(request):
 	return render_to_response('userProfile/change_password.html',{'form':form},context_instance=RequestContext(request))
 
 
-@login_required(login_url='/login/')
+@login_required(login_url='/accounts/login/')
 def changeusername(request):
 
 	if request.method == 'GET':
@@ -77,7 +77,7 @@ def changeusername(request):
 			return HttpResponseRedirect("/user_profile/")
 	return render_to_response('userProfile/change_username.html',{'form':form},context_instance=RequestContext(request))	
 
-@login_required(login_url='/login/')
+@login_required(login_url='/accounts/login/')
 def changefirstname(request):
 
 	if request.method == 'GET':
@@ -91,7 +91,7 @@ def changefirstname(request):
 			return HttpResponseRedirect("/user_profile/")
 	return render_to_response('userProfile/change_firstname.html',{'form':form},context_instance=RequestContext(request))
 
-@login_required(login_url='/login/')
+@login_required(login_url='/accounts/login/')
 def changesecondname(request):
 
 	if request.method == 'GET':
@@ -107,7 +107,7 @@ def changesecondname(request):
 
 
 
-@login_required(login_url='/login/')
+@login_required(login_url='/accounts/login/')
 def changeemail(request):
 
 	if request.method == 'GET':
