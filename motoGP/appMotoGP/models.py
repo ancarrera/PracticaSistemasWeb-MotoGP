@@ -25,6 +25,7 @@ class Pilot(models.Model):
 	image = models.ImageField(upload_to='img', null=True, blank=True, default='img/no-image.png')
 	manufacturer = models.ForeignKey(Manufacturer)
 	country = models.ForeignKey(Country)
+	creator = models.CharField(max_length=60, null=True)
 	def __unicode__(self):
 		return self.pilot_name +"-"+ str(self.pilot_age)+"anyos"
 

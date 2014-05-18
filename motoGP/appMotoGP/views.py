@@ -303,6 +303,12 @@ class CreatePilot(CreateView):
 	form_class = PilotForm
 	success_url="/pilot"
 
+	def get_initial(self):
+
+		default_creator = "Crated by "+self.request.user.username
+		initial={'creator':default_creator,}
+		return initial
+
 	def form_valid(self, form):
 		return super(CreatePilot, self).form_valid(form)
 
@@ -310,7 +316,7 @@ class UpdatePilot(UpdateView):
 
 	model = Pilot
 	template_name = 'management/modifyPilot.html'
-	form_class = PilotForm
+	form_class = PilotFormMod
 	success_url="/pilot"
 
 	def get_initial(self):
@@ -318,7 +324,7 @@ class UpdatePilot(UpdateView):
 		pilot = Pilot.objects.get(pk=pk)
 		initial={'pilot_name':pilot.pilot_name,
 			   'pilot_age':pilot.pilot_age,'race_win':pilot.race_win,'manufacturer':pilot.manufacturer,
-			    'country':pilot.country}
+			    'country':pilot.country,}
 		return initial
 
 #API RESTful

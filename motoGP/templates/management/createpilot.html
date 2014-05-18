@@ -14,7 +14,6 @@
 {% endblock %}
 
 
-
 {% block content %}
 
 <form method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
@@ -24,10 +23,10 @@
 		</table>
 		<br />
 		<input class="button-link" type="submit" value="Submit"/>
-
 </form>
 	
 	<br />
 	<br />
+		<input class="button-link" type="button" value="Pilotos" onClick=location.href="/pilot/" /> |
 		<input class="button-link" type="button" value="Volver a inicio" onClick=location.href="/index/" />
 {% endblock %}

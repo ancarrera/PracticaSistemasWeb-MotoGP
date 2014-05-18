@@ -77,5 +77,11 @@ class PilotForm(forms.ModelForm):
 	class Meta:
 		model = Pilot
 
+class PilotFormMod(forms.ModelForm):
+
+	class Meta:
+		model = Pilot
+		exclude = ('creator',)
+
 	
 
