@@ -2,12 +2,16 @@
 {% load staticfiles %}
 		{% block title %}Información de pilotos{% endblock %}
 		
-		{% block header %}
+		{% block static %}
 		<link rel="stylesheet" href="{% static "css/img.css" %}" />
+		<link rel="stylesheet" type="text/css" href="{% static "css/title_content.css" %}">
+		{% endblock %}
+		{% block header %}
 		<h1>Información de pilotos --- {{pilot.pilot_name}}</h1>
 		{% endblock %}
 
 		{% block content %}
+		<h3 id="name">{{pilot.pilot_name}}<h3>
 		<ul>
 		 	<li>
 		 	 El nombre del piloto es{{pilot.pilot_name}}.

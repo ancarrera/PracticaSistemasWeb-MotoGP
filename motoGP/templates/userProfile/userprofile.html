@@ -3,12 +3,13 @@
 
 		{% block title %}Perfil de usuario{% endblock %}
 
-		{% block header %}
-		<h1>Perfil de usuario</h1>
+
+		{% block static %}
+		<link rel="stylesheet" type="text/css" href="{% static "css/userprofile.css" %}"/>
 		{% endblock %}
 
-		{% block staticos %}
-		<link rel="stylesheet" type="text/css" href="{% static "css/userprofile.css" %}"/>
+		{% block header %}
+		<h1>Perfil de usuario</h1>
 		{% endblock %}
 
 		{% block content %}

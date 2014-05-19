@@ -74,6 +74,8 @@ class ChangeUsername(forms.Form):
 
 class PilotForm(forms.ModelForm):
 
+	creator = forms.CharField(widget=forms.TextInput(attrs={'readonly': True}))
+	
 	class Meta:
 		model = Pilot
 
