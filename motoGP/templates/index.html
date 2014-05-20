@@ -17,22 +17,22 @@
 		 <p><strong>Contenido:</strong></p>
 		<ul>
 			<li>
-				<a href="/pilot/"><strong>Pilotos</strong></a>
+				<a href="/pilots/"><strong>Pilotos</strong></a>
 				<br></br>
 			</li>
 
 			<li>
-				<a href="/manufacturer/"><strong>Fabricantes</strong></a>
+				<a href="/manufacturers/"><strong>Fabricantes</strong></a>
 				<br></br>
 			</li>
 
 			<li>
-				<a href="/category/"><strong>Categorias</strong></a>
+				<a href="/categories/"><strong>Categorias</strong></a>
 				<br></br>
 			</li>
 
 			<li>
-				<a href="/country/"><strong>Paises</strong></a>
+				<a href="/countries/"><strong>Paises</strong></a>
 				<br></br>
 			</li>
 		</ul>
@@ -41,9 +41,9 @@
 		
 		<h3>{{special_user_head}}<h3>
 
-		<p><input class="button-link" type="button" value="Crear usuario especial" onClick=location.href="/specialUser/" /></p>
+		<p><input class="button-link" type="button" value="Crear usuario especial" onClick=location.href="/user/special/new" /></p>
 
-		<p><input class="button-link" type="button" value="Crear piloto" onClick=location.href="/create/new_pilot/" /></p>
+		<p><input class="button-link" type="button" value="Crear piloto" onClick=location.href="/pilots/create/" /></p>
 
 		{% else %}
 
@@ -51,11 +51,11 @@
 
 					<h3>{{special_user_head}}<h3>
 
-					<p><input class="button-link" type="button" value="Crear piloto" onClick=location.href="/create/new_pilot/" /></p>
+					<p><input class="button-link" type="button" value="Crear piloto" onClick=location.href="/pilots/create/" /></p>
     		{% endif %}
 		{% endif %}
 
 		 <br />
 		 <br />
-		<p><input class="button-link" type="button" value="Perfil de usuario" onClick=location.href="/user_profile/" />  |  <input class="button-link" type="button" value="Cerrar sesion" onClick=location.href="/accounts/logout/" /></p> 				
+		<p><input class="button-link" type="button" value="Perfil de usuario" onClick=location.href="/user/profile/" />  |  <input class="button-link" type="button" value="Cerrar sesion" onClick=location.href="/accounts/logout/" /></p> 				
 	{% endblock %}

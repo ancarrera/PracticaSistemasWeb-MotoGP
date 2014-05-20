@@ -8,7 +8,7 @@ from django.template import Context, RequestContext
 
 from forms import *
 #crear un nuevo usuario
-@login_required(login_url='/accounts/login/')
+
 def newuser(request):
 	if request.method=='POST':
 		form = UserCreateForm(request.POST)

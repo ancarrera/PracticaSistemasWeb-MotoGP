@@ -11,19 +11,19 @@
 		<ul>
 			{% for pilot in pilots %}
 		 <li>
-		 	 <a href="/pilot/{{pilot.id}}">{{pilot.pilot_name}} </a> 
+		 	 <a href="/pilots/{{pilot.id}}">{{pilot.pilot_name}} </a> 
 		 	 
 
 			{% if user.is_superuser %}
 		
-				<p><input class="button-link" type="button" value="Modificar" onClick=location.href="/pilot/{{pilot.id}}/modify/" /> |
-				<input  class="button-link" type="button" value="Eliminar" onClick=location.href="/pilot/{{pilot.id}}/delete/" /></p>
+				<p><input class="button-link" type="button" value="Modificar" onClick=location.href="/pilots/{{pilot.id}}/modify/" /> |
+				<input  class="button-link" type="button" value="Eliminar" onClick=location.href="/pilots/{{pilot.id}}/delete/" /></p>
 
 			{% else %}
 				{% if group %}
 
-				<p><input class="button-link" type="button" value="Modificar" onClick=location.href="/pilot/{{pilot.id}}/modify/" /> |
-				<input class="button-link" type="button" value="Eliminar" onClick=location.href="/pilot/{{pilot.id}}/delete/" /></p>
+				<p><input class="button-link" type="button" value="Modificar" onClick=location.href="/pilots/{{pilot.id}}/modify/" /> |
+				<input class="button-link" type="button" value="Eliminar" onClick=location.href="/pilots/{{pilot.id}}/delete/" /></p>
 				{% endif %}
 
 			{% endif %}

@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load staticfiles %}
 		{% block title %}Fabricantes por categoría{% endblock %}
 
 		{% block static %}
@@ -8,16 +8,17 @@
 		{% endblock %}
 		
 		{% block header %}
-		<h1>Fabricantes por categoría</h1>
+		<h1>Fabricantes por categoría --- {{category.name}}</h1>
 		{% endblock %}
 
 		{% block content %}
+		<h3 id="title_content">{{category.name}}</h3>
 		{{category.description}}
 		{% if category.manufacturer %}
 		<ul>
 			{% for manufacturer in category.manufacturer.all %}
 		 <li>
-		 	<a href="/manufacturer/{{manufacturer.id}}"> {{manufacturer.manufacturer_name}} </a>
+		 	<a href="/manufacturers/{{manufacturer.id}}"> {{manufacturer.manufacturer_name}} </a>
 		</li>
 		{% endfor %} 
 		</ul>
@@ -28,6 +29,6 @@
 		<br />
 		<br />
 
-		<p><input class="button-link" type="button" value="Categorias" onClick=location.href="/category/" /> |
+		<p><input class="button-link" type="button" value="Categorias" onClick=location.href="/categories/" /> |
 		<input class="button-link" type="button" value="Volver a inicio" onClick=location.href="/index/" /></p>
 	{% endblock %}

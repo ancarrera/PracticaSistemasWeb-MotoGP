@@ -241,7 +241,7 @@ def countryinfo(request,format,country_id):
 		output = template.render(variables)
 		return HttpResponse(output)
 
-@login_required(login_url='/login/')
+@login_required(login_url='/accounts/login/')
 def categorypagehtml(request):
 
 	return categorypage(request, None)
@@ -301,11 +301,11 @@ class CreatePilot(CreateView):
 	model = Pilot
 	template_name = 'management/createpilot.html'
 	form_class = PilotForm
-	success_url="/pilot"
+	success_url="/pilots"
 
 	def get_initial(self):
 
-		default_creator = "Crated by "+self.request.user.username
+		default_creator = "Created by "+self.request.user.username
 		initial={'creator':default_creator,}
 		return initial
 
@@ -317,7 +317,7 @@ class UpdatePilot(UpdateView):
 	model = Pilot
 	template_name = 'management/modifyPilot.html'
 	form_class = PilotFormMod
-	success_url="/pilot"
+	success_url="/pilots"
 
 	def get_initial(self):
 		pk=self.kwargs['pk']
@@ -327,8 +327,12 @@ class UpdatePilot(UpdateView):
 			    'country':pilot.country,}
 		return initial
 
-#API RESTful
+	def form_valid(self, form):
+		return super(UpdatePilot, self).form_valid(form)
 
+
+
+#API RESTful
 
 class APICountryList(generics.ListCreateAPIView):
     model = Country

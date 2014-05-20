@@ -1,17 +1,18 @@
 {% extends "base.html" %}
-
+{% load staticfiles %}
 		{% block title %}Información del país{% endblock %}
 
 		{% block static %}
 		<link rel="stylesheet" href="{% static "css/img.css" %}" />
-		<link rel="stylesheet" type="text/css" href="{% static "css/title_content.css" %}">
+		<link rel="stylesheet" type="text/css" href="{% static "css/title_content.css" %}"/>
 		{% endblock %}
 		
 		{% block header %}
-		<h1>Información del país</h1>
+		<h1>Información del país --- {{country.country_name}}</h1>
 		{% endblock %}
 
 		{% block content %}
+		<h3 id="title_content">{{country.country_name}}</h3>
 		<ul>
 			 <li>
 			 	 {{country.description}}
@@ -21,6 +22,6 @@
 		<br />
 		<br />
 
-		<p><input class="button-link" type="button" value="Paises" onClick=location.href="/country/" /> |
+		<p><input class="button-link" type="button" value="Paises" onClick=location.href="/countries/" /> |
 		<input class="button-link" type="button" value="Volver a inicio" onClick=location.href="/index/" /></p>
 	{% endblock %}

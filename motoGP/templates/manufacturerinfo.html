@@ -1,27 +1,29 @@
 {% extends "base.html" %}
+{% load staticfiles %}
 
 		{% block title %}Información de fabricantes{% endblock %}
 
 		{% block static %}
 		<link rel="stylesheet" href="{% static "css/img.css" %}" />
-		<link rel="stylesheet" type="text/css" href="{% static "css/title_content.css" %}">
+		<link rel="stylesheet" type="text/css" href="{% static "css/title_content.css" %}"/>
 		{% endblock %}
 		
 		{% block header %}
-		<h1>Información de fabricantes</h1>
+		<h1>Información de fabricantes --- {{manufacturer.manufacturer_name}}</h1>
 		{% endblock %}
 
 		{% block content %}
+		<h3 id="title_content">{{manufacturer.manufacturer_name}}</h3>
 		<ul>
 		 <li>
 		 	El nombre del fabricante es {{manufacturer.manufacturer_name}} 
-		 	y es de <a href="/country/{{manufacturer.country.id}}"> {{manufacturer.country.country_name}}</a>.
+		 	y es de <a href="/countries/{{manufacturer.country.id}}"> {{manufacturer.country.country_name}}</a>.
 		 </li>
 		</ul>
 		
 		<br />
 		<br />
 
-		<p><input class="button-link" type="button" value="Fabricantes" onClick=location.href="/manufacturer/" /> |
+		<p><input class="button-link" type="button" value="Fabricantes" onClick=location.href="/manufacturers/" /> |
 			<input class="button-link" type="button" value="Volver a inicio" onClick=location.href="/index/" /></p>
 	{% endblock %}

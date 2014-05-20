@@ -4,17 +4,17 @@
 		
 		{% block static %}
 		<link rel="stylesheet" href="{% static "css/img.css" %}" />
-		<link rel="stylesheet" type="text/css" href="{% static "css/title_content.css" %}">
+		<link rel="stylesheet" type="text/css" href="{% static "css/title_content.css" %}"/>
 		{% endblock %}
 		{% block header %}
 		<h1>Información de pilotos --- {{pilot.pilot_name}}</h1>
 		{% endblock %}
 
 		{% block content %}
-		<h3 id="name">{{pilot.pilot_name}}<h3>
+		<h3 id="title_content">{{pilot.pilot_name}}<h3>
 		<ul>
 		 	<li>
-		 	 El nombre del piloto es{{pilot.pilot_name}}.
+		 	 El nombre del piloto es {{pilot.pilot_name}}.
 		 	</li>
 		 	<li>
 		 	 El piloto tiene {{pilot.pilot_age}} años.
@@ -23,11 +23,11 @@
 		 	 Ha ganado {{pilot.race_win}} carreras.
 		 	</li>
 		 	<li>
-		 	 Corre para el fabricante <a href="/manufacturer/{{pilot.manufacturer.id}}">
+		 	 Corre para el fabricante <a href="/manufacturers/{{pilot.manufacturer.id}}">
 		 	 {{pilot.manufacturer.manufacturer_name}}. </a>
 		 	</li>
 		 	<li>
-		 	 Su nacionalidad es <a href="/country/{{pilot.country.id}}">{{pilot.country.country_name}}.</a>
+		 	 Su nacionalidad es <a href="/countries/{{pilot.country.id}}">{{pilot.country.country_name}}.</a>
 		 	</li>
 		 	<li>
 		 	 Representa a la compañia {{pilot.representative_company}}.</a>
@@ -35,6 +35,7 @@
 		 	<li>
 		 	 Debuto en el circuito de {{pilot.debut_circuit}}.</a>
 		 	</li>
+
 		
 		<div class="imagen">
 				<span></span>
@@ -45,11 +46,11 @@
 				{% endif %}
 
 		</div>
-
+		<p>{{pilot.creator}}</p>
 		<br />
 		<br />
 
-		<p id="buttons"><input class="button-link" type="button" value="Pilotos" onClick=location.href="/pilot/" /> |
+		<p id="buttons"><input class="button-link" type="button" value="Pilotos" onClick=location.href="/pilots/" /> |
 		<input class="button-link" type="button" value="Volver a inicio" onClick=location.href="/index/" /></p>
 
 	{% endblock %}

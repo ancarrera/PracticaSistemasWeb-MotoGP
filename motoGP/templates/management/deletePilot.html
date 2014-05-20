@@ -7,7 +7,7 @@
 <form action="" method="post">{% csrf_token %}
     <p>¿Estas seguro que quieres borrar "{{ object }}"?</p>
     <input class="button-link" type="submit" value="Confirmar" />
-    <input class="button-link" type="button" value="Cancelar" onClick=location.href="/pilot/" />
+    <input class="button-link" type="button" value="Cancelar" onClick=location.href="/pilots/" />
 </form>
 
 {% endblock %}
