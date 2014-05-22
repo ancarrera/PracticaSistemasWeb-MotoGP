@@ -5,10 +5,11 @@ from django.template.loader import get_template
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.template import Context, RequestContext
+from django.contrib.auth.models import Group
 
 from forms import *
-#crear un nuevo usuario
 
+#crear un nuevo usuario
 def newuser(request):
 	if request.method=='POST':
 		form = UserCreateForm(request.POST)
@@ -22,11 +23,13 @@ def newuser(request):
 	return render_to_response('registration/newuser.html',
 		   {'form':form},context_instance=RequestContext(request))
 
+
 #obtener el perfil de usuario
 def addUserPermissions(specialUser):
 	group = Group.objects.get(name='special_user')
 	specialUser.groups.add(group)
 
+#obtener la informacion del perfil de usuario.
 @login_required(login_url='/accounts/login/')
 def profileinfo(request):
 
@@ -46,7 +49,6 @@ def profileinfo(request):
 	return HttpResponse(output)
 
 
-
 @login_required(login_url='/accounts/login/')
 def changepassword(request):
 
@@ -59,7 +61,7 @@ def changepassword(request):
 			password = form.cleaned_data['password1']
 			user.set_password(password)
 			user.save(update_fields=['password'])
-			return HttpResponseRedirect("/user_profile/")
+			return HttpResponseRedirect("/user/profile/")
 	return render_to_response('userProfile/change_password.html',{'form':form},context_instance=RequestContext(request))
 
 
@@ -74,8 +76,9 @@ def changeusername(request):
 			user = User.objects.get(username=request.user.username)
 			user.username = form.cleaned_data['username']
 			user.save(update_fields=['username'])
-			return HttpResponseRedirect("/user_profile/")
+			return HttpResponseRedirect("/user/profile/")
 	return render_to_response('userProfile/change_username.html',{'form':form},context_instance=RequestContext(request))	
+
 
 @login_required(login_url='/accounts/login/')
 def changefirstname(request):
@@ -88,8 +91,9 @@ def changefirstname(request):
 			user = User.objects.get(username=request.user.username)
 			user.first_name = form.cleaned_data['firstname']
 			user.save(update_fields=['first_name'])
-			return HttpResponseRedirect("/user_profile/")
+			return HttpResponseRedirect("/user/profile/")
 	return render_to_response('userProfile/change_firstname.html',{'form':form},context_instance=RequestContext(request))
+
 
 @login_required(login_url='/accounts/login/')
 def changesecondname(request):
@@ -102,9 +106,8 @@ def changesecondname(request):
 			user = User.objects.get(username=request.user.username)
 			user.last_name = form.cleaned_data['secondname']
 			user.save(update_fields=['last_name'])
-			return HttpResponseRedirect("/user_profile/")
+			return HttpResponseRedirect("/user/profile/")
 	return render_to_response('userProfile/change_secondname.html',{'form':form},context_instance=RequestContext(request))
-
 
 
 @login_required(login_url='/accounts/login/')
@@ -118,6 +121,6 @@ def changeemail(request):
 			user = User.objects.get(username=request.user.username)
 			user.email = form.cleaned_data['email']
 			user.save(update_fields=['email'])
-			return HttpResponseRedirect("/user_profile/")
+			return HttpResponseRedirect("/user/profile/")
 	return render_to_response('userProfile/change_email.html',
 							{'form':form},context_instance=RequestContext(request))

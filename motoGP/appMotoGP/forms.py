@@ -30,6 +30,8 @@ class UserCreateForm(UserCreationForm):
 			user.save()
 			return user
 
+# Formularios para editar el perfil de usuario.
+
 class ChangeFirstName(forms.Form):
 
 	firstname = forms.CharField(label="Cambiar nombre")
@@ -72,6 +74,8 @@ class ChangeUsername(forms.Form):
 		model = User
 		fields = ('username')
 
+#Formularios para crear y modificar los pilotos.
+
 class PilotForm(forms.ModelForm):
 
 	creator = forms.CharField(widget=forms.TextInput(attrs={'readonly': True}))
@@ -84,6 +88,3 @@ class PilotFormMod(forms.ModelForm):
 	class Meta:
 		model = Pilot
 		exclude = ('creator',)
-
-	
-

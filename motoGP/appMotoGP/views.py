@@ -4,7 +4,6 @@ from django.core import serializers
 from django.views.generic import *
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
-from django.contrib.auth.models import Group
 from django.contrib.auth.views import logout
 from django.views.generic.edit import CreateView,UpdateView
 from rest_framework import generics, permissions

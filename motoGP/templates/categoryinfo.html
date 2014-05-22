@@ -3,7 +3,6 @@
 		{% block title %}Fabricantes por categoría{% endblock %}
 
 		{% block static %}
-		<link rel="stylesheet" href="{% static "css/img.css" %}" />
 		<link rel="stylesheet" type="text/css" href="{% static "css/title_content.css" %}">
 		{% endblock %}
 		
@@ -25,10 +24,8 @@
 		{% else %}
 		<p>Aún no se ha añadido fabricantes para esta categoría</p>
 		{% endif %}
-		
 		<br />
 		<br />
-
 		<p><input class="button-link" type="button" value="Categorias" onClick=location.href="/categories/" /> |
 		<input class="button-link" type="button" value="Volver a inicio" onClick=location.href="/index/" /></p>
 	{% endblock %}
