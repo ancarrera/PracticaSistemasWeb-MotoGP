@@ -30,11 +30,12 @@ urlpatterns = patterns('',
     url(r'^accounts/login/','django.contrib.auth.views.login'),
     url(r'^index/', indexhtml),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^pilots/(?P<pk>\d+)/reviews/create/$',review, name='review_create'),
     url(r'^pilots/create/$',login_required(CreatePilot.as_view()), name='pilot_create'),
     url(r'^pilots/(?P<pk>\d+)/modify/$',login_required(UpdatePilot.as_view()), name="pilot_modify"),
     url(r'^pilots/(?P<pk>\d+)/delete/$',login_required(DeleteView.as_view(model=Pilot, success_url="/pilots/",template_name="management/deletePilot.html")), name="pilot_delete"),
-    url(r'^pilots/(\w+)', pilotinfohtml),
-    url(r'^(\w+)/pilots/(\w+)', pilotinfo),
+    url(r'^pilots/(\w+)', pilotinfohtml,name='pilot_detail'),
+    url(r'^(\w+)/pilots/(\w+)', pilotinfo, name='pilotinfo'),
     url(r'^(\w+)/pilots/', pilotpage),
     url(r'^pilots/$', pilotpagehtml),
     url(r'^manufacturers/(\w+)',manufacturerinfohtml),
@@ -59,7 +60,7 @@ urlpatterns = patterns('',
     url(r'^user/create/', newuser),
     url(r'^accounts/logout/', 'django.contrib.auth.views.logout', {'next_page': '/'}),
    
-
+  
 ) 
 #static url
 urlpatterns += staticfiles_urlpatterns()

@@ -5,13 +5,18 @@
 		{% block static %}
 		<link rel="stylesheet" href="{% static "css/img.css" %}" />
 		<link rel="stylesheet" type="text/css" href="{% static "css/title_content.css" %}"/>
+		<link rel="stylesheet" type="text/css" href="{% static "css/title_review.css" %}"/>
 		{% endblock %}
 		{% block header %}
 		<h1>Información de pilotos --- {{pilot.pilot_name}}</h1>
 		{% endblock %}
 
 		{% block content %}
-		<h3 id="title_content">{{pilot.pilot_name}}<h3>
+		
+		<span vocab="http://schema.org/" typeof="Person">
+
+
+		<h3 id="title_content"><span property="name">{{ pilot.pilot_name }}</span><h3>
 		<ul>
 		 	<li>
 		 	 El nombre del piloto es {{pilot.pilot_name}}.
@@ -20,13 +25,15 @@
 		 	 El piloto tiene {{pilot.pilot_age}} años.
 		 	</li>
 		 	<li>
-		 	 Ha ganado {{pilot.race_win}} carreras.
+		 	 Ha ganado <span property="award">{{pilot.race_win}} carreras</span>.
 		 	</li>
 		 	<li>
+	 		<span property="worksFor" content="{{pilot.manufacturer.manufacturer_name}}"></span>
 		 	 Corre para el fabricante <a href="/manufacturers/{{pilot.manufacturer.id}}">
 		 	 {{pilot.manufacturer.manufacturer_name}}. </a>
 		 	</li>
 		 	<li>
+		 		<span property="nationality" content="{{pilot.country.country_name}}"></span>
 		 	 Su nacionalidad es <a href="/countries/{{pilot.country.id}}">{{pilot.country.country_name}}.</a>
 		 	</li>
 		 	<li>
@@ -38,13 +45,11 @@
 
 		
 		<div class="imagen">
-				<span></span>
 				{% if pilot.image %}
-					<img src="{{ MEDIA_URL }}{{ pilot.image.url }}" width="350" height="250"/>
+					<img src="{{ pilot.image.url }}" width="350" height="250"/>
 				{% else %}
-					<img src="{{ MEDIA_URL }}img/no-image.png" width="350" height="250"/>
+					<img src="img/no-image.png" width="350" height="250"/>
 				{% endif %}
-
 		</div>
 		{% if pilot.creator %}
 		<p>{{pilot.creator}}</p>
@@ -52,7 +57,56 @@
 		<br />
 		<br />
 
+<h3 id="title_review">Reviews</h3>
+
+{% if pilot.pilotreview_set.all|length > 0 %}
+<span rel="aggregateRating">
+	<p typeof="AggregateRating"> Average rating
+	<span property="ratingValue">{{ pilot.totalRating|stringformat:".1f" }}</span>
+	{% with pilot.pilotreview_set.all|length as count %}
+	from <span property="reviewCount">
+		{{ count }}
+		</span>
+		review{{count|pluralize}}
+	{% endwith %}
+	</p>
+</span>
+
+<ul rel="review">
+{% for review in pilot.pilotreview_set.all %}
+<li typeof="Review">
+	<p rel="reviewRating" typeof="Rating">
+	<span property="worstRating" content="{{rating.0.0}}"></span>
+		<span property="ratingValue">{{ review.rating}}</span>
+			star{{ review.rating|pluralize}}
+			{% with rating|last as best %}
+			<span property="bestRating" content="{{best.0}}"></span>
+			{% endwith %}
+	</p>
+	<p property="description">{{review.comment}}</p>
+	<p>Created by <span property="author">{{ review.user}}</span>
+	on <span property="publishDate">{{ review.date}}</span></p>
+</li>
+{% endfor %}
+</ul>
+</span>
+{% endif %}
+
+<h3 id="title_review">Add Review</h3>
+<form action="{% url 'review_create' pilot.id %}" method="POST">
+	{% csrf_token %}
+	Message:
+	<textarea name="comment" id="comment" rows="4"></textarea>
+	<p>Rating:</p>
+	<p>
+		{% for rate in rating %}
+			<input type="radio" name="rating" id="rating{{ forloop.counter}}" value="{{rate.1}}"/>
+			<label for="choice{{forloop.counter}}">{{rate.1}} star{{rate.0|pluralize}}</label><br/>
+		{% endfor %}
+	</p>
+	<input class="button-link" type="submit" value="Review" />
+</form>
 		<p id="buttons"><input class="button-link" type="button" value="Pilotos" onClick=location.href="/pilots/" /> |
 		<input class="button-link" type="button" value="Volver a inicio" onClick=location.href="/index/" /></p>
 
-	{% endblock %}
+{% endblock %}
