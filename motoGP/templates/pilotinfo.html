@@ -5,7 +5,7 @@
 		{% block static %}
 		<link rel="stylesheet" href="{% static "css/img.css" %}" />
 		<link rel="stylesheet" type="text/css" href="{% static "css/title_content.css" %}"/>
-		<link rel="stylesheet" type="text/css" href="{% static "css/title_review.css" %}"/>
+		<link rel="stylesheet" type="text/css" href="{% static "css/review.css" %}"/>
 		{% endblock %}
 		{% block header %}
 		<h1>Información de pilotos --- {{pilot.pilot_name}}</h1>
@@ -57,17 +57,17 @@
 		<br />
 		<br />
 
-<h3 id="title_review">Reviews</h3>
+<h3 id="title_review">Comentarios</h3>
 
 {% if pilot.pilotreview_set.all|length > 0 %}
 <span rel="aggregateRating">
-	<p typeof="AggregateRating"> Average rating
-	<span property="ratingValue">{{ pilot.totalRating|stringformat:".1f" }}</span>
+	<p id="title_rating" typeof="AggregateRating"> Valoración media
+	<span property="ratingValue">{{ pilot.totalRating|stringformat:".1f" }} / 5</span>
 	{% with pilot.pilotreview_set.all|length as count %}
-	from <span property="reviewCount">
+	de <span property="reviewCount">
 		{{ count }}
 		</span>
-		review{{count|pluralize}}
+		comentario{{count|pluralize}}
 	{% endwith %}
 	</p>
 </span>
@@ -83,7 +83,7 @@
 			<span property="bestRating" content="{{best.0}}"></span>
 			{% endwith %}
 	</p>
-	<p property="description">{{review.comment}}</p>
+	<p property="description"><textarea readonly cols="50" rows="6">{{review.comment}}</textarea></p>
 	<p>Created by <span property="author">{{ review.user}}</span>
 	on <span property="publishDate">{{ review.date}}</span></p>
 </li>
@@ -92,19 +92,19 @@
 </span>
 {% endif %}
 
-<h3 id="title_review">Add Review</h3>
+<h3 id="title_review">Añadir comentario</h3>
 <form action="{% url 'review_create' pilot.id %}" method="POST">
 	{% csrf_token %}
-	Message:
-	<textarea name="comment" id="comment" rows="4"></textarea>
-	<p>Rating:</p>
+	<p>Comentario:</p>
+	<textarea name="comment" id="comment" rows="8" cols="50">Escribre un comentario ...</textarea>
+	<p>Valoración:</p>
 	<p>
 		{% for rate in rating %}
 			<input type="radio" name="rating" id="rating{{ forloop.counter}}" value="{{rate.1}}"/>
-			<label for="choice{{forloop.counter}}">{{rate.1}} star{{rate.0|pluralize}}</label><br/>
+			<label for="choice{{forloop.counter}}">{{rate.1}} star{{rate.0|pluralize}}</label>
 		{% endfor %}
 	</p>
-	<input class="button-link" type="submit" value="Review" />
+	<input class="button-link" type="submit" value="Añadir comentario" />
 </form>
 		<p id="buttons"><input class="button-link" type="button" value="Pilotos" onClick=location.href="/pilots/" /> |
 		<input class="button-link" type="button" value="Volver a inicio" onClick=location.href="/index/" /></p>

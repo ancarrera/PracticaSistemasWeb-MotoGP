@@ -35,7 +35,7 @@ class Pilot(models.Model):
 	def get_absolute_url(self):
 		return reverse('pilot_detail', kwargs={'pk': self.pk})
 
-	def totalRating():
+	def totalRating(self):
 		currentRating = 0.0
 		for rew in self.pilotreview_set.all():
 			currentRating += rew.rating
@@ -66,3 +66,8 @@ class Review(models.Model):
 
 class PilotReview(Review):
     pilot = models.ForeignKey(Pilot)
+
+    def __unicode__(self):
+		return "comentario-" + self.user.username+"-"+str(self.date)
+
+
