@@ -3,6 +3,7 @@ from rest_framework.relations import HyperlinkedRelatedField, HyperlinkedIdentit
 from rest_framework.serializers import HyperlinkedModelSerializer
 from models import *
 
+
 class CountrySerializer(HyperlinkedModelSerializer):
     url = HyperlinkedIdentityField(view_name='appMotoGP:country-detail')
     pilots = HyperlinkedRelatedField(many=True, read_only=True, view_name='appMotoGP:pilotinfohtml')
@@ -33,3 +34,11 @@ class CategorySerializer(HyperlinkedModelSerializer):
     class Meta:
         model = Category
         fields = ('name', 'description', 'manufacturer')
+
+class PilotReviewSerializer(HyperlinkedModelSerializer):
+    url = HyperlinkedIdentityField(view_name='pilotreview-detail')
+    pilot = HyperlinkedRelatedField(view_name='pilot-detail')
+    user = CharField(read_only=True)
+    class Meta:
+        model = PilotReview
+        fields = ('url', 'rating', 'comment','date','user','pilot')

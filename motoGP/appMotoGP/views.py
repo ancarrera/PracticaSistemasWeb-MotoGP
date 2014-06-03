@@ -331,38 +331,8 @@ class UpdatePilot(UpdateView):
 	def form_valid(self, form):
 		return super(UpdatePilot, self).form_valid(form)
 
+
 @login_required(login_url='/accounts/login/')
-def revie(request, pk):
-	pilot = get_object_or_404(Pilot, pk=pk)
-	new_review = PilotReview(
-	rating=request.POST['rating'],
-	comment=request.POST['comment'],
-	user=request.user,
-	pilot=pilot)
-	new_review.save()
-	return render_to_response("pilotinfo.html",{}, context_instance=RequestContext(request) )
-
-class ReviewForm(forms.Form):
-
-	def __init__(self, user=None,pk=1, *args, **kwargs):
-		super(ReviewForm, self).__init__(*args, **kwargs)
-		self._user = user
-		self.pk = pk
-
-	class Meta:
-		model = Review
-		include=('rating','comment')
-
-	def save(self):
-		pilot = Pilot.object.get(pk=pk)
-		new_review = PilotReview(
-			rating=self.cleaned_data['rating'],
-			comment=self.cleaned_data['rating'],
-			user=self._user,
-			pilot=pilot)
-		new_review.save()
-
-
 def review(request, pk):
 	pilot = get_object_or_404(Pilot, pk=pk)
 
@@ -373,6 +343,9 @@ def review(request, pk):
 		pilot=pilot)
 	new_review.save()
 	return HttpResponseRedirect(urlresolvers.reverse('pilot_detail', args=(pilot.id,)))
+
+
+
 #API RESTful
 
 class APICountryList(generics.ListCreateAPIView):
@@ -406,3 +379,12 @@ class APIManufacturerList(generics.ListCreateAPIView):
 class APIManufacturerDetail(generics.RetrieveUpdateDestroyAPIView):
     model = Manufacturer
     serializer_class = ManufacturerSerializer
+
+class APIPilotReviewList(generics.ListCreateAPIView):
+    model = PilotReview
+    serializer_class = PilotReviewSerializer
+    
+class APIPilotReviewDetail(generics.RetrieveUpdateDestroyAPIView):
+    model = PilotReview
+    serializer_class = PilotReviewSerializer
+

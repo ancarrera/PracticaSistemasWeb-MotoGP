@@ -22,8 +22,8 @@ urlpatterns = patterns('',
     url(r'^api/manufacturers/(?P<pk>\d+)/$', login_required(APIManufacturerDetail.as_view()), name='manufacturer-detail'),
     url(r'^api/pilots/$', login_required(APIPilotList.as_view()), name='pilot-list'),
     url(r'^api/pilots/(?P<pk>\d+)/$', login_required(APIPilotDetail.as_view()), name='pilot-detail'),
-
-
+    url(r'^api/pilotreviews/$', login_required(APIPilotReviewList.as_view()), name='pilotreview-list'),
+    url(r'^api/pilotreviews/(?P<pk>\d+)/$', login_required(APIPilotReviewDetail.as_view()), name='pilotreview-detail'),
     #Web url
     url(r'^$', welcomeindex),
     url(r'^/$', welcomeindex),
@@ -62,6 +62,7 @@ urlpatterns = patterns('',
    
   
 ) 
+
 #static url
 urlpatterns += staticfiles_urlpatterns()
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

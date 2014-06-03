@@ -4,6 +4,7 @@ from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
+
 #creamos subclase de UserCreationForm para que nos cree el formulario 
 #para el registro
 class UserCreateForm(UserCreationForm):
